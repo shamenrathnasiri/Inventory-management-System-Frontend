@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { login, loadUser } from "../../services/AuthService";
 import Login from "./Login";
 import { setUser } from "../../services/UserService";
-import { Shield, Users, Info, Mail, Phone } from "lucide-react";
-import { motion } from "framer-motion";
+import { Shield, Package, Info, Mail, Phone } from "lucide-react";
+
 
 function LoginPage({ onSuccess }) {
   const [error, setError] = useState(null);
@@ -87,7 +88,7 @@ function LoginPage({ onSuccess }) {
           >
             <img
               src="./logo.png"
-              alt="HRM System Logo"
+              alt="Inventory System Logo"
               className="h-16 w-auto"
             />
           </motion.div>
@@ -97,7 +98,7 @@ function LoginPage({ onSuccess }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.5 }}
           >
-            HRM System
+            Inventory System
           </motion.h1>
           <motion.p
             className="text-lg lg:text-xl text-blue-100 mb-8 max-w-md"
@@ -105,7 +106,7 @@ function LoginPage({ onSuccess }) {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.5 }}
           >
-            Streamline your human resources management with our comprehensive
+            Streamline your inventory management with our comprehensive
             platform.
           </motion.p>
         </div>
@@ -121,11 +122,11 @@ function LoginPage({ onSuccess }) {
             className="flex items-center gap-4"
           >
             <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
-              <Users className="h-6 w-6" />
+              <Package className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-lg">Employee Management</h3>
-              <p className="text-blue-100">Manage your workforce efficiently</p>
+              <h3 className="font-semibold text-lg">Inventory Management</h3>
+              <p className="text-blue-100">Manage your stock efficiently</p>
             </div>
           </motion.div>
 

@@ -1,18 +1,23 @@
-let token = null;
+// Token Service - Handles JWT token storage and retrieval
 
-export function setToken(newToken) {
-  token = newToken;
-  if (newToken !== null) {
-    localStorage.setItem("token", newToken);
+const TOKEN_KEY = 'auth_token';
+
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export async function setToken(token) {
+  if (token) {
+    localStorage.setItem(TOKEN_KEY, token);
   } else {
-    localStorage.removeItem("token");
+    localStorage.removeItem(TOKEN_KEY);
   }
 }
 
-export function getToken() {
-  if (token !== null) {
-    return token;
-  }
-  token = localStorage.getItem("token");
-  return token;
+export function removeToken() {
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+export function hasToken() {
+  return !!getToken();
 }

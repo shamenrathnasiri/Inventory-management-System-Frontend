@@ -1,8 +1,7 @@
 import React, {useCallback,useEffect,useMemo,useRef,useState,} from "react";
 import { Plus, Trash2, CheckCircle, X } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
-import { getSalesOrders } from "../../services/AccountingService";
-import {getProducts,getCustomers,fetchInvoices,getNextSalesReturn,createSalesReturn,} from "../../services/Inventory/inventoryService"; // dummy data inventoryService.js
+import {fetchSalesOrders,getProducts,getCustomers,fetchInvoices,getNextSalesReturn,createSalesReturn,} from "../../services/Inventory/inventoryService";
 import { fetchCenters as fetchCentersService } from "../../services/Inventory/centerService";
 import InventoryPopup from "../../components/Inventory/inventoryPopup";
 import { SuccessPdfView } from "../../components/Inventory/successPdf";
@@ -19,8 +18,16 @@ const SalesReturn = () => {
 
 
   useEffect(() => {
-    const initial = getSalesOrders();
-    setOrders(initial);
+    const loadOrders = async () => {
+      try {
+        const data = await fetchSalesOrders();
+        setOrders(Array.isArray(data) ? data : []);
+      } catch (e) {
+        console.warn("Failed to fetch sales orders", e);
+        setOrders([]);
+      }
+    };
+    loadOrders();
   }, []);
  
   const LAST_SRET_STORAGE_KEY = "inventory_last_sret_id";

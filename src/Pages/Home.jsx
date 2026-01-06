@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Building2, Users, Shield } from "lucide-react";
 import Dashboard from "./Dashboard/Dashboard";
 import LoginPage from "./Login/LoginPage";
 import { loadUser, logout } from "../services/AuthService";
-import {
-  getUser,
-  setUser as storeUser,
-  clearUser,
-} from "../services/UserService";
-import { useNavigate, useLocation } from "react-router-dom"; // << added
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+
+// Simple user storage utilities (replacing UserService)
+const getUser = () => {
+  try {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
+};
+
+const setUser = (user) => {
+  localStorage.setItem("user", JSON.stringify(user));
+};
+
+const clearUser = () => {
+  localStorage.removeItem("user");
+};
 
 // Home Page (Landing + Auth)
 function Home() {
-  const [user, setUser] = useState(getUser());
-  const navigate = useNavigate(); // << added
+  const [user, setUserState] = useState(getUser());
+  const navigate = useNavigate();
   const location = useLocation();
   const { setAuthUser, clearAuth } = useAuth();
 
@@ -23,11 +35,11 @@ function Home() {
     async function fetchUser() {
       try {
         const userData = await loadUser();
+        setUserState(userData);
         setUser(userData);
-        storeUser(userData);
-        navigate("/dashboard", { replace: true }); // <-- redirect when found
+        navigate("/dashboard", { replace: true });
       } catch {
-        setUser(null);
+        setUserState(null);
         clearUser();
       }
     }
@@ -36,7 +48,6 @@ function Home() {
       fetchUser();
     } else {
       // only navigate to /dashboard if we're not already on a dashboard route
-      // this prevents clobbering deep links like /dashboard/leaveApproval on refresh
       if (!location.pathname.startsWith("/dashboard")) {
         navigate("/dashboard", { replace: true });
       }
@@ -46,8 +57,8 @@ function Home() {
   const handleAuthSuccess = async () => {
     try {
       const userData = await loadUser();
+      setUserState(userData);
       setUser(userData);
-      storeUser(userData);
       // also update AuthContext so permissions recalc without a full refresh
       setAuthUser(userData);
       // After successful login, navigate to previous attempted path if any,
@@ -55,7 +66,7 @@ function Home() {
       const dest = (location.state && location.state.from) || "/dashboard";
       navigate(dest);
     } catch {
-      setUser(null);
+      setUserState(null);
       clearUser();
       clearAuth();
     }
@@ -63,68 +74,30 @@ function Home() {
 
   const handleLogout = async () => {
     try {
-      await logout(); // Clear token on backend and localStorage
+      await logout();
       localStorage.removeItem("employeeFormData");
-    } catch (e) {
+    } catch {
       // Optionally handle error
     }
-    clearUser(); // Clear user from localStorage
-    setUser(null); // Update state to trigger re-render
-    clearAuth(); // Clear user and permissions in context
-    navigate("/", { replace: true }); // << navigate back to home/login
+    clearUser();
+    setUserState(null);
+    clearAuth();
+    navigate("/", { replace: true });
   };
 
   if (user) {
-    // keep the same Dashboard render so props are preserved
     return <Dashboard user={user} onLogout={handleLogout} />;
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-slate-100">
       <div className="flex min-h-screen">
-        {/* Left Branding Section */}
-        {/* <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-indigo-600 to-indigo-800 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-black opacity-10"></div>
-          <div className="relative z-10 flex flex-col justify-center px-12">
-            <div className="mb-8">
-              <Building2 className="h-16 w-16 mb-6" />
-              <h1 className="text-4xl font-bold mb-4">HRM System</h1>
-              <p className="text-xl text-indigo-100 leading-relaxed">
-                Streamline your human resources management with our
-                comprehensive platform.
-              </p>
-            </div> */}
-
-        {/* <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                  <Users className="h-6 w-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Employee Management</h3>
-                  <p className="text-indigo-100 text-sm">
-                    Manage your workforce efficiently
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="bg-white bg-opacity-20 p-3 rounded-lg">
-                  <Shield className="h-6 w-6" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Secure & Reliable</h3>
-                  <p className="text-indigo-100 text-sm">
-                    Enterprise-grade security
-                  </p>
-                </div>
-              </div>
-            </div> */}
-        {/* </div>
-        </div> */}
-
-        {/* Right Authentication Section (now LoginPage) */}
-        <LoginPage onSuccess={handleAuthSuccess} />
+        {/* Right Section - Login Form */}
+        <div className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="w-full max-w-md">
+            <LoginPage onSuccess={handleAuthSuccess} />
+          </div>
+        </div>
       </div>
     </div>
   );

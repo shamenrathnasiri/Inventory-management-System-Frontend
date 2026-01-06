@@ -1,80 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
-  Building2,
-  Users,
-  UserCheck,
-  Calendar,
-  Clock,
-  DollarSign,
-  PieChart,
+  Package,
+  ShoppingCart,
+  TrendingUp,
+  AlertTriangle,
 } from "lucide-react";
-import NotificationBell from "../../components/NotificationBell";
-import { Bar, Pie, Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  PointElement,
-  LineElement,
-} from "chart.js";
 
 import Sidebar from "./Sidebar";
-import EmployeeMaster from "@dashboard/AddEmployeeMaster/EmployeeMaster";
-import EmployeeAdd from "@dashboard/EmployeeAdd";
-import ShowEmployee from "@dashboard/ShowEmployee";
-import CreateNewDeduction from "@dashboard/createnewdeduction";
-import ShiftSchedule from "@dashboard/ShiftSchedule";
-import CreateNewAllowance from "@dashboard/createnewallowance";
-import EmployeeLoan from "@dashboard/employeeloan";
-import TimeCard from "@dashboard/timecard";
-import Overtime from "@dashboard/overtime";
-import Department from "@dashboard/Department";
-import Grouproster from "@dashboard/Grouproster";
-import LeaveMaster from "@dashboard/LeaveMaster";
-import NoPayManagement from "@dashboard/nopaymanagement";
-import LeaveCalendar from "@dashboard/leavecalendar";
-import SalaryProcessPage from "@dashboard/salaryprocesspage";
-import LeaveApproval from "@dashboard/LeaveApproval";
-import HRLeaveApproval from "@dashboard/HRLeaveApproval";
-import Resignation from "@dashboard/Resignation";
-import Termination from "@dashboard/Termination";
-import ViewLoans from "@dashboard/ViewLoans";
-import SalaryPage from "@dashboard/SalaryPage";
-import UserManagement from "@dashboard/UserManagement";
-import Chatbot from "./Chatbot";
-// Import PMS components
-import { PMSDashboard, PerformanceReviews, KPIs } from "../PMS";
-import EmployeePerformanceEvaluation from "../PMS/EmployeeEvaluation";
-import EmployeeKPIView from "../PMS/KPIs/EmployeeKPIView";
-import TaskApproval from "../../Pages/PMS/TaskApproval/TaskApproval";
-import PerformanceAppraisal from "../PMS/PerformanceAppraisal/PerformanceAppraisal";
 
-// Import LMS components
-import LMS from "../LMS/LMS";
-import UserStats from "../LMS/UserStats";
-
-// Import Accounting components
-import AccountingDashboard from "@Accounting/Dashboard";
+// Import Inventory components
 import Supplier from "@Inventory/Supplier";
-import DoubleEntry from "../Accounting/DoubleEntry";
-import ChartOfAccounts from "../Accounting/ChartOfAccounts";
-import AccountList from "../Accounting/AccountList";
 import Customer from "@Inventory/Customer";
 import Center from "@Inventory/Center";
 import DiscountLevel from "../Inventory/MasterFile/DiscountLevel";
 import ProductList from "../Inventory/MasterFile/ProductList";
 import ProductType from "../Inventory/MasterFile/ProductType";
-import Transactions from "../Accounting/Transactions";
-import Ledger from "../Accounting/Ledger";
-import TrialBalance from "../Accounting/TrialBalance";
-import IncomeStatement from "../Accounting/IncomeStatement";
-import BalanceSheet from "../Accounting/BalanceSheet";
-import CashFlowStatement from "../Accounting/CashFlowStatement";
 import Invoices from "../Inventory/Invoices";
 import SalesOrder from "../Inventory/SalesOrder";
 import SalesReturn from "../Inventory/SalesReturn";
@@ -84,25 +24,7 @@ import PurchaseOrder from "../Inventory/PurchaseOrder";
 import StockTransfer from "../Inventory/StockTransfer";
 import StockVerification from "../Inventory/StockVerification";
 import Pending from "../Inventory/Pending";
-import Expenses from "../Accounting/Expenses";
-import AccountingReports from "../Accounting/Reports";
-import AccountingSettings from "../Accounting/Settings";
-// Import new accounting pages
-import SupplierEnterBill from "../Accounting/SupplierEnterBill";
-import Payment from "../Accounting/Payment";
-import AdvancePayment from "../Accounting/AdvancePayment";
-import MakeDeposit from "../Accounting/MakeDeposit";
-import Receipt from "../Accounting/Receipt";
-import UtilityBill from "../Accounting/UtilityBill";
-import UtilityBillPayment from "../Accounting/UtilityBillPayment";
-import JournalEntry from "../Accounting/JournalEntry";
-import PettyCash from "../Accounting/PettyCash";
-import Cheque from "../Accounting/Cheque";
-import BankReconciliation from "../Accounting/BankReconciliation";
 
-import employeeService from "../../services/EmployeeDataService";
-import { fetchDepartments } from "../../services/ApiDataService";
-import timeCardService from "../../services/timeCardService";
 import ProtectedComponent from "../../components/ProtectedComponent";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -116,18 +38,6 @@ import {
 } from "../../utils/SidebarUtils";
 import { getResponsive } from "../../utils/ResponsiveUtils";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  PointElement,
-  LineElement
-);
-
 const STORAGE_KEY = "employeeFormData";
 
 const clearForm = () => {
@@ -135,55 +45,12 @@ const clearForm = () => {
 };
 
 const DashboardStats = () => {
-  const [stats, setStats] = useState([
-    { name: "Total Employees", value: "-", change: "-", icon: Users },
-    { name: "Present Today", value: "-", change: "-", icon: UserCheck },
-    { name: "On Leave", value: "-", change: "-", icon: Calendar },
-    { name: "Departments", value: "-", change: "-", icon: Building2 },
-  ]);
-
-  useEffect(() => {
-    async function fetchStats() {
-      try {
-        // Fetch total employees
-        const employees = await employeeService.fetchEmployees();
-        // Fetch departments
-        const departments = await fetchDepartments();
-        // Fetch today's stats
-        const todayStats = await timeCardService.fetchTodayStats();
-
-        setStats([
-          {
-            name: "Total Employees",
-            value: employees.length,
-            change: "+12%",
-            icon: Users,
-          },
-          {
-            name: "Present Today",
-            value: todayStats.present,
-            change: "+2.3%",
-            icon: UserCheck,
-          },
-          {
-            name: "On Leave",
-            value: todayStats.on_leave,
-            change: "-5.4%",
-            icon: Calendar,
-          },
-          {
-            name: "Departments",
-            value: departments.length,
-            change: "+1",
-            icon: Building2,
-          },
-        ]);
-      } catch (error) {
-        console.error("Error fetching dashboard stats:", error);
-      }
-    }
-    fetchStats();
-  }, []);
+  const stats = [
+    { name: "Total Products", value: "-", change: "+12%", icon: Package },
+    { name: "Sales Today", value: "-", change: "+2.3%", icon: ShoppingCart },
+    { name: "Revenue", value: "-", change: "+5.4%", icon: TrendingUp },
+    { name: "Low Stock Items", value: "-", change: "-3", icon: AlertTriangle },
+  ];
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -220,264 +87,44 @@ const DashboardStats = () => {
   );
 };
 
-const DashboardCharts = () => {
-  const [attendanceData, setAttendanceData] = useState({
-    labels: [],
-    datasets: [],
-  });
-  const [departmentData, setDepartmentData] = useState({
-    labels: [],
-    datasets: [],
-  });
-
-  useEffect(() => {
-    async function fetchChartData() {
-      try {
-        // Fetch attendance for the last 7 days
-        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-        let presentCounts = [];
-        let absentCounts = [];
-
-        for (let i = 0; i < 7; i++) {
-          const date = new Date();
-          date.setDate(date.getDate() - (6 - i));
-          const dateStr = date.toISOString().slice(0, 10);
-
-          // Get present count for this date
-          const timeCards = await timeCardService.getTimeCardsByDate(dateStr);
-          const presentEmployees = new Set();
-
-          timeCards.forEach((card) => {
-            if (card.status === "IN") {
-              presentEmployees.add(card.employee_id);
-            }
-          });
-
-          const employees = await employeeService.fetchEmployees();
-          presentCounts.push(presentEmployees.size);
-          absentCounts.push(employees.length - presentEmployees.size);
-        }
-
-        setAttendanceData({
-          labels: days,
-          datasets: [
-            {
-              label: "Present",
-              data: presentCounts,
-              backgroundColor: "rgba(16, 185, 129, 0.8)",
-              borderColor: "rgba(16, 185, 129, 1)",
-              borderWidth: 2,
-              borderRadius: 8,
-              borderSkipped: false,
-            },
-            {
-              label: "Absent",
-              data: absentCounts,
-              backgroundColor: "rgba(239, 68, 68, 0.8)",
-              borderColor: "rgba(239, 68, 68, 1)",
-              borderWidth: 2,
-              borderRadius: 8,
-              borderSkipped: false,
-            },
-          ],
-        });
-
-        // Fetch departments and employee counts per department
-        const departments = await fetchDepartments();
-        const employees = await employeeService.fetchEmployees();
-        const deptLabels = departments.map((d) => d.name);
-        const deptCounts = departments.map(
-          (d) =>
-            employees.filter((e) => e.organization?.department === d.name)
-              .length
-        );
-
-        setDepartmentData({
-          labels: deptLabels,
-          datasets: [
-            {
-              data: deptCounts,
-              backgroundColor: [
-                "rgba(239, 68, 68, 0.8)",
-                "rgba(59, 130, 246, 0.8)",
-                "rgba(251, 191, 36, 0.8)",
-                "rgba(16, 185, 129, 0.8)",
-                "rgba(139, 92, 246, 0.8)",
-                "rgba(251, 146, 60, 0.8)",
-              ],
-              borderColor: [
-                "rgba(239, 68, 68, 1)",
-                "rgba(59, 130, 246, 1)",
-                "rgba(251, 191, 36, 1)",
-                "rgba(16, 185, 129, 1)",
-                "rgba(139, 92, 246, 1)",
-                "rgba(251, 146, 60, 1)",
-              ],
-              borderWidth: 2,
-            },
-          ],
-        });
-      } catch (error) {
-        console.error("Error fetching chart data:", error);
-      }
-    }
-    fetchChartData();
-  }, []);
-
-  const salaryData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-    datasets: [
-      {
-        label: "Total Salary Paid (LKR)",
-        data: [
-          85000000, 87000000, 89000000, 91000000, 93000000, 95000000, 97000000,
-        ],
-        fill: true,
-        backgroundColor: "rgba(139, 92, 246, 0.2)",
-        borderColor: "rgba(139, 92, 246, 1)",
-        borderWidth: 3,
-        tension: 0.4,
-        pointBackgroundColor: "rgba(139, 92, 246, 1)",
-        pointBorderColor: "#fff",
-        pointBorderWidth: 2,
-        pointRadius: 6,
-      },
-    ],
-  };
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300">
-        <div className="flex items-center mb-6">
-          <div className="bg-blue-100 p-2 rounded-xl mr-3">
-            <Clock className="h-6 w-6 text-blue-600" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-800">Weekly Attendance</h3>
-        </div>
-        <div className="h-80">
-          <Bar
-            data={attendanceData}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "top",
-                  labels: {
-                    usePointStyle: true,
-                    padding: 20,
-                    font: {
-                      size: 12,
-                      weight: "bold",
-                    },
-                  },
-                },
-              },
-              scales: {
-                y: {
-                  beginAtZero: true,
-                  grid: {
-                    color: "rgba(0, 0, 0, 0.1)",
-                  },
-                  ticks: {
-                    callback: function (value) {
-                      return value.toLocaleString();
-                    },
-                    font: {
-                      size: 11,
-                    },
-                  },
-                },
-                x: {
-                  grid: {
-                    display: false,
-                  },
-                  ticks: {
-                    font: {
-                      size: 11,
-                    },
-                  },
-                },
-              },
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 hover:shadow-2xl transition-all duration-300">
-        <div className="flex items-center mb-6">
-          <div className="bg-green-100 p-2 rounded-xl mr-3">
-            <Building2 className="h-6 w-6 text-green-600" />
-          </div>
-          <h3 className="text-xl font-bold text-gray-800">
-            Department Distribution
-          </h3>
-        </div>
-        <div className="h-80">
-          <Pie
-            data={departmentData}
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: {
-                  position: "right",
-                  labels: {
-                    usePointStyle: true,
-                    padding: 20,
-                    font: {
-                      size: 12,
-                      weight: "bold",
-                    },
-                  },
-                },
-              },
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const QuickActions = ({ setActiveItem }) => {
   const actions = [
     {
-      icon: Users,
-      label: "Add Employee",
-      action: "employeeMaster",
+      icon: Package,
+      label: "Products",
+      action: "product",
       color: "from-blue-500 to-blue-600",
       iconBg: "bg-blue-100",
       iconColor: "text-blue-600",
     },
     {
-      icon: Calendar,
-      label: "Leave",
-      action: "leaveMaster",
+      icon: ShoppingCart,
+      label: "Sales Order",
+      action: "salesOrder",
       color: "from-green-500 to-green-600",
       iconBg: "bg-green-100",
       iconColor: "text-green-600",
     },
     {
-      icon: Clock,
-      label: "Time Cards",
-      action: "TimeCard",
+      icon: TrendingUp,
+      label: "Purchase Order",
+      action: "purchaseOrder",
       color: "from-yellow-500 to-yellow-600",
       iconBg: "bg-yellow-100",
       iconColor: "text-yellow-600",
     },
     {
-      icon: DollarSign,
-      label: "Loan",
-      action: "employeeLoan",
+      icon: Package,
+      label: "GRN",
+      action: "grn",
       color: "from-purple-500 to-purple-600",
       iconBg: "bg-purple-100",
       iconColor: "text-purple-600",
     },
     {
-      icon: PieChart,
-      label: "Leave Calendar",
-      action: "leavecalendar",
+      icon: AlertTriangle,
+      label: "Stock Verification",
+      action: "stockVerification",
       color: "from-pink-500 to-pink-600",
       iconBg: "bg-pink-100",
       iconColor: "text-pink-600",
@@ -560,25 +207,15 @@ const Dashboard = ({ user, onLogout }) => {
 
   useEffect(() => {
     const parts = location.pathname.split("/").filter(Boolean);
-    if (
-      parts[0] === "dashboard" &&
-      parts[1] === "pms" &&
-      parts[2] === "evaluation"
-    ) {
-      setActiveItem("employeeEvaluation");
-    } else {
-      const section = parts[1] || "dashboard";
-      if (section && section !== activeItem) {
-        setActiveItem(section);
-      }
+    const section = parts[1] || "dashboard";
+    if (section && section !== activeItem) {
+      setActiveItem(section);
     }
   }, [location.pathname]);
 
   const handleSetActiveItem = (id) => {
     setActiveItem(id);
     if (id === "dashboard") navigate("/dashboard", { replace: false });
-    else if (id === "employeeEvaluation")
-      navigate("/dashboard/pms/evaluation", { replace: false });
     else navigate(`/dashboard/${id}`, { replace: false });
   };
 
@@ -625,10 +262,10 @@ const Dashboard = ({ user, onLogout }) => {
               <div className="hidden lg:flex items-center">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <Building2 className="h-5 w-5 text-white" />
+                    <Package className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-xl font-bold text-gray-900">
-                    HRM Dashboard
+                    Inventory Dashboard
                   </span>
                 </div>
               </div>
@@ -647,7 +284,6 @@ const Dashboard = ({ user, onLogout }) => {
                     {user.role}
                   </span>
                 </span>
-                <NotificationBell />
                 <button
                   onClick={onLogout}
                   className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -660,153 +296,7 @@ const Dashboard = ({ user, onLogout }) => {
         </nav>
         <div className="flex-1">
           <div className="py-3 sm:py-4 lg:py-6 px-3 sm:px-4 lg:px-6 xl:px-8">
-            {activeItem === "employeeMaster" ? (
-              <ProtectedComponent module="employeeMaster" action="view">
-                <EmployeeMaster />
-              </ProtectedComponent>
-            ) : activeItem === "employeeAdd" ? (
-              <ProtectedComponent module="employeeAdd" action="view">
-                <EmployeeAdd />
-              </ProtectedComponent>
-            ) : activeItem === "show" ? (
-              <ProtectedComponent module="show" action="view">
-                <ShowEmployee />
-              </ProtectedComponent>
-            ) : activeItem === "EmployeeMaster" ? (
-              <ProtectedComponent module="EmployeeMaster" action="view">
-                <EmployeeMaster />
-              </ProtectedComponent>
-            ) : activeItem === "createNewDeduction" ? (
-              <ProtectedComponent module="createNewDeduction" action="view">
-                <CreateNewDeduction />
-              </ProtectedComponent>
-            ) : activeItem === "shiftTime" ? (
-              <ProtectedComponent module="shiftTime" action="view">
-                <ShiftSchedule />
-              </ProtectedComponent>
-            ) : activeItem === "createNewAllowance" ? (
-              <ProtectedComponent module="createNewAllowance" action="view">
-                <CreateNewAllowance />
-              </ProtectedComponent>
-            ) : activeItem === "employeeLoan" ? (
-              <ProtectedComponent module="employeeLoan" action="view">
-                <EmployeeLoan />
-              </ProtectedComponent>
-            ) : activeItem === "viewLoans" ? (
-              <ProtectedComponent module="viewLoans" action="view">
-                <ViewLoans />
-              </ProtectedComponent>
-            ) : activeItem === "noPayManagement" ? (
-              <ProtectedComponent module="noPayManagement" action="view">
-                <NoPayManagement />
-              </ProtectedComponent>
-            ) : activeItem === "hrLeaveApproval" ? (
-              <ProtectedComponent module="hrLeaveApproval" action="view">
-                <HRLeaveApproval />
-              </ProtectedComponent>
-            ) : activeItem === "leaveApproval" ? (
-              <ProtectedComponent module="leaveApproval" action="view">
-                <LeaveApproval />
-              </ProtectedComponent>
-            ) : activeItem === "leaveMaster" ? (
-              <ProtectedComponent module="leaveMaster" action="view">
-                <LeaveMaster />
-              </ProtectedComponent>
-            ) : activeItem === "TimeCard" ? (
-              <ProtectedComponent module="TimeCard" action="view">
-                <TimeCard />
-              </ProtectedComponent>
-            ) : activeItem === "Overtime" ? (
-              <ProtectedComponent module="Overtime" action="view">
-                <Overtime />
-              </ProtectedComponent>
-            ) : activeItem === "departmentMaster" ? (
-              <ProtectedComponent module="departmentMaster" action="view">
-                <Department />
-              </ProtectedComponent>
-            ) : activeItem === "grouproster" ? (
-              <ProtectedComponent module="grouproster" action="view">
-                <Grouproster />
-              </ProtectedComponent>
-            ) : activeItem === "leavecalendar" ? (
-              <ProtectedComponent module="leavecalendar" action="view">
-                <LeaveCalendar />
-              </ProtectedComponent>
-            ) : activeItem === "SalaryProcessPage" ? (
-              <ProtectedComponent module="SalaryProcessPage" action="view">
-                <SalaryProcessPage />
-              </ProtectedComponent>
-            ) : activeItem === "termination" ? (
-              <ProtectedComponent module="termination" action="view">
-                <Termination />
-              </ProtectedComponent>
-            ) : activeItem === "SalaryPage" ? (
-              <ProtectedComponent module="SalaryPage" action="view">
-                <SalaryPage />
-              </ProtectedComponent>
-            ) : activeItem === "resignation" ? (
-              <ProtectedComponent module="resignation" action="view">
-                <Resignation />
-              </ProtectedComponent>
-            ) : activeItem === "userManagement" ? (
-              <ProtectedComponent module="userManagement" action="view">
-                <UserManagement />
-              </ProtectedComponent>
-            ) : activeItem === "pmsDashboard" ? (
-              <ProtectedComponent module="pmsDashboard" action="view">
-                <PMSDashboard />
-              </ProtectedComponent>
-            ) : activeItem === "performanceReviews" ? (
-              <ProtectedComponent module="performanceReviews" action="view">
-                <PerformanceReviews />
-              </ProtectedComponent>
-            ) : activeItem === "kpis" ? (
-              <ProtectedComponent module="kpis" action="view">
-                <KPIs />
-              </ProtectedComponent>
-            ) : activeItem === "employeeEvaluation" ? (
-              <EmployeePerformanceEvaluation />
-            ) : activeItem === "PerformanceAppraisal" ? (
-              <ProtectedComponent module="PerformanceAppraisal" action="view">
-                <PerformanceAppraisal />
-              </ProtectedComponent>
-            ) : activeItem === "taskApproval" ? (
-              <ProtectedComponent module="taskApproval" action="view">
-                <TaskApproval />
-              </ProtectedComponent>
-            ) : activeItem === "myKPIs" ? (
-              <ProtectedComponent module="myKPIs" action="view">
-                <EmployeeKPIView />
-              </ProtectedComponent>
-            ) : activeItem === "lms" ? (
-              <ProtectedComponent module="lms" action="view">
-                <LMS />
-              </ProtectedComponent>
-            ) : activeItem === "lmsDashboard" ? (
-              <ProtectedComponent module="lms" action="view">
-                <LMS initialView="dashboard" />
-              </ProtectedComponent>
-            ) : activeItem === "manageExams" ? (
-              <ProtectedComponent module="manageExams" action="view">
-                <LMS initialView="exams" />
-              </ProtectedComponent>
-            ) : activeItem === "manageCourses" ? (
-              <ProtectedComponent module="manageCourses" action="view">
-                <LMS initialView="manage" />
-              </ProtectedComponent>
-            ) : activeItem === "myProgress" ? (
-              <ProtectedComponent module="myProgress" action="view">
-                <LMS initialView="progress" />
-              </ProtectedComponent>
-            ) : activeItem === "lmsUserStats" ? (
-              <ProtectedComponent module="lmsUserStats" action="view">
-                <UserStats />
-              </ProtectedComponent>
-            ) : activeItem === "accountingDashboard" ? (
-              <ProtectedComponent module="accountingDashboard" action="view">
-                <AccountingDashboard setActiveItem={setActiveItem} />
-              </ProtectedComponent>
-            ) : activeItem === "customer" ? (
+            {activeItem === "customer" ? (
               <ProtectedComponent module="customer" action="view">
                 <Customer />
               </ProtectedComponent>
@@ -825,42 +315,6 @@ const Dashboard = ({ user, onLogout }) => {
             ) : activeItem === "discountLevel" ? (
               <ProtectedComponent module="discountLevel" action="view">
                 <DiscountLevel />
-              </ProtectedComponent>
-            ) : activeItem === "chartOfAccounts" ? (
-              <ProtectedComponent module="chartOfAccounts" action="view">
-                <ChartOfAccounts />
-              </ProtectedComponent>
-            ) : activeItem === "accountList" ? (
-              <ProtectedComponent module="accountList" action="view">
-                <AccountList />
-              </ProtectedComponent>
-            ) : activeItem === "transactions" ? (
-              <ProtectedComponent module="transactions" action="view">
-                <Transactions />
-              </ProtectedComponent>
-            ) : activeItem === "transactionsList" ? (
-              <ProtectedComponent module="transactionsList" action="view">
-                <Transactions />
-              </ProtectedComponent>
-            ) : activeItem === "ledger" ? (
-              <ProtectedComponent module="ledger" action="view">
-                <Ledger />
-              </ProtectedComponent>
-            ) : activeItem === "trialBalance" ? (
-              <ProtectedComponent module="trialBalance" action="view">
-                <TrialBalance />
-              </ProtectedComponent>
-            ) : activeItem === "incomeStatement" ? (
-              <ProtectedComponent module="incomeStatement" action="view">
-                <IncomeStatement />
-              </ProtectedComponent>
-            ) : activeItem === "balanceSheet" ? (
-              <ProtectedComponent module="balanceSheet" action="view">
-                <BalanceSheet />
-              </ProtectedComponent>
-            ) : activeItem === "cashFlowStatement" ? (
-              <ProtectedComponent module="cashFlowStatement" action="view">
-                <CashFlowStatement />
               </ProtectedComponent>
             ) : activeItem === "invoices" ? (
               <ProtectedComponent module="invoices" action="view">
@@ -902,83 +356,18 @@ const Dashboard = ({ user, onLogout }) => {
               <ProtectedComponent module="supplier" action="view">
                 <Supplier />
               </ProtectedComponent>
-            ) : activeItem === "accountingReports" ? (
-              <ProtectedComponent module="accountingReports" action="view">
-                <AccountingReports />
-              </ProtectedComponent>
-            ) : activeItem === "accountingSettings" ? (
-              <ProtectedComponent module="accountingSettings" action="view">
-                <AccountingSettings />
-              </ProtectedComponent>
-            ) : activeItem === "supplierEnterBill" ? (
-              <ProtectedComponent module="supplierEnterBill" action="view">
-                <SupplierEnterBill />
-              </ProtectedComponent>
-            ) : activeItem === "payment" ? (
-              <ProtectedComponent module="payment" action="view">
-                <Payment />
-              </ProtectedComponent>
-            ) : activeItem === "advancePayment" ? (
-              <ProtectedComponent module="advancePayment" action="view">
-                <AdvancePayment />
-              </ProtectedComponent>
-            ) : activeItem === "makeDeposit" ? (
-              <ProtectedComponent module="makeDeposit" action="view">
-                <MakeDeposit />
-              </ProtectedComponent>
-            ) : activeItem === "receipt" ? (
-              <ProtectedComponent module="receipt" action="view">
-                <Receipt />
-              </ProtectedComponent>
-            ) : activeItem === "createUtilityBill" ? (
-              <ProtectedComponent module="createUtilityBill" action="view">
-                <UtilityBill />
-              </ProtectedComponent>
-            ) : activeItem === "utilityBillPayment" ? (
-              <ProtectedComponent module="utilityBillPayment" action="view">
-                <UtilityBillPayment />
-              </ProtectedComponent>
-            ) : activeItem === "journalEntry" ? (
-              <ProtectedComponent module="journalEntry" action="view">
-                <JournalEntry />
-              </ProtectedComponent>
-            ) : activeItem === "pettyCash" ? (
-              <ProtectedComponent module="pettyCash" action="view">
-                <PettyCash />
-              </ProtectedComponent>
-            ) : activeItem === "cheque" ? (
-              <ProtectedComponent module="cheque" action="view">
-                <Cheque />
-              </ProtectedComponent>
-            ) : activeItem === "doubleEntry" ? (
-              <ProtectedComponent module="doubleEntry" action="view">
-                <DoubleEntry />
-              </ProtectedComponent>
-            ) : activeItem === "bankReconciliation" ? (
-              <ProtectedComponent module="bankReconciliation" action="view">
-                <BankReconciliation />
-              </ProtectedComponent>
-            ) : activeItem === "supplier" ? (
-              <ProtectedComponent module="supplier" action="view">
-                <Supplier />
-              </ProtectedComponent>
-            )  : activeItem === "chatbot" ? (
-              <ProtectedComponent module="chatbot" action="view">
-                <Chatbot />
-              </ProtectedComponent>
             ) : (
               <div className="space-y-8">
                 <div className="text-center mb-8">
                   <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                    HRM Dashboard
+                    Inventory Dashboard
                   </h1>
                   <p className="text-gray-600 text-lg">
-                    Welcome to your comprehensive HR management system
+                    Welcome to your comprehensive inventory management system
                   </p>
                 </div>
                 <DashboardStats />
                 <QuickActions setActiveItem={setActiveItem} />
-                <DashboardCharts />
                 <div className="flex justify-center"></div>
               </div>
             )}
