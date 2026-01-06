@@ -91,14 +91,7 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-slate-100">
-      <div className="flex min-h-screen">
-        {/* Right Section - Login Form */}
-        <div className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-md">
-            <LoginPage onSuccess={handleAuthSuccess} />
-          </div>
-        </div>
-      </div>
+      <LoginPage onSuccess={handleAuthSuccess} />
     </div>
   );
 }
