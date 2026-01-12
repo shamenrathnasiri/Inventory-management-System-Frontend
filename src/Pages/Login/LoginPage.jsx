@@ -34,6 +34,7 @@ function LoginPage({ onSuccess }) {
     try {
       if (!isLogin && formData.password !== formData.confirmPassword) {
         setFieldErrors({ confirmPassword: ["Passwords do not match"] });
+        setLoading(false);
         return {};
       }
 
