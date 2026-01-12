@@ -877,7 +877,7 @@ const Invoices = () => {
               <h1 className="text-2xl sm:text-3xl font-bold uppercase text-slate-900 mb-2">
                 Purchase Return
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl min-h-7 flex items-center gap-2">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl min-h-7 flex items-center gap-2">
                 {nextPrtId ? (
                   <>
                     <span>Purchase Return Number:</span>
@@ -885,7 +885,7 @@ const Invoices = () => {
                   </>
                 ) : (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-red-600 border-t-transparent" />
                     <span>Loading number…</span>
                   </>
                 )}
@@ -916,7 +916,7 @@ const Invoices = () => {
                     }
                     aria-invalid={!!errors.date}
                     aria-describedby={errors.date ? "date-error" : undefined}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 ${
                       errors.date
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-white hover:border-slate-400"
@@ -945,7 +945,7 @@ const Invoices = () => {
                       }))
                     }
                     disabled={loading.centers}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 ${
                       errors.center
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-white hover:border-slate-400"
@@ -982,7 +982,7 @@ const Invoices = () => {
                       errors.supplier ? "supplier-error" : undefined
                     }
                     disabled={loading.suppliers}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 ${
                       errors.supplier
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-white hover:border-slate-400"
@@ -1039,7 +1039,7 @@ const Invoices = () => {
                         refNumber: e.target.value,
                       }))
                     }
-                    className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent hover:border-slate-400 transition-all duration-200 bg-white"
+                    className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent hover:border-slate-400 transition-all duration-200 bg-white"
                     placeholder="Enter reference number"
                   />
                 </div>
@@ -1137,7 +1137,7 @@ const Invoices = () => {
                         onBlur={() => {
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 ${
                           errors.productName
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white hover:border-slate-400"
@@ -1151,7 +1151,7 @@ const Invoices = () => {
                               key={p.id}
                               className={`px-4 py-3 cursor-pointer flex justify-between items-center transition-colors duration-150 ${
                                 idx === activeIndex
-                                  ? "bg-blue-50 border-l-4 border-blue-500"
+                                  ? "bg-red-50 border-l-4 border-red-500"
                                   : "hover:bg-slate-50"
                               }`}
                               onMouseEnter={() => setActiveIndex(idx)}
@@ -1328,7 +1328,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`Quantity for ${it.name}`}
-                                      className="w-20 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-all duration-200 bg-white"
+                                      className="w-20 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-all duration-200 bg-white"
                                     />
                                   </td>
                                   <td className="px-4 sm:px-6 py-4 text-left whitespace-nowrap">
@@ -1345,7 +1345,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`Unit price for ${it.name}`}
-                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-all duration-200 bg-white"
+                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-all duration-200 bg-white"
                                     />
                                   </td>
                                   <td className="px-4 sm:px-6 py-4 text-left whitespace-nowrap">
@@ -1362,7 +1362,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`MRP for ${it.name}`}
-                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-all duration-200 bg-white"
+                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-all duration-200 bg-white"
                                     />
                                   </td>
                                   <td className="px-4 sm:px-6 py-4 text-left whitespace-nowrap">
@@ -1379,7 +1379,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`Discount for ${it.name}`}
-                                      className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-all duration-200 bg-white"
+                                      className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-all duration-200 bg-white"
                                     />
                                   </td>
                                   <td className="px-4 sm:px-6 py-4 text-sm font-bold text-slate-900 text-left whitespace-nowrap">
@@ -1417,7 +1417,7 @@ const Invoices = () => {
                   disabled={
                     isSubmitting || loading.centers || loading.suppliers
                   }
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center gap-2 font-semibold text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center gap-2 font-semibold text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -1459,7 +1459,7 @@ const Invoices = () => {
           <div className="space-y-4">
             {isGrnLoading ? (
               <div className="flex items-center justify-center gap-3 text-slate-600">
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-red-600 border-t-transparent" />
                 Loading GRNs…
               </div>
             ) : grnOptions.length ? (
@@ -1484,7 +1484,7 @@ const Invoices = () => {
                       type="button"
                       key={grnNumber || `grn-${idx}`}
                       onClick={() => applyGrnToReturn(grn)}
-                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-red-400 hover:bg-red-50 transition-colors"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
@@ -1547,7 +1547,7 @@ const Invoices = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-slate-100 p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-red-50 to-slate-100 p-4 sm:p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
         <section aria-label="Create new purchase return">
           <InlineNewInvoiceForm
@@ -1567,7 +1567,7 @@ const Invoices = () => {
           aria-live="polite"
         >
           <div className="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 border border-slate-200">
-            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-red-600 border-t-transparent"></div>
             <span className="text-slate-800 font-medium">
               Creating purchase return…
             </span>
@@ -1621,3 +1621,6 @@ const Invoices = () => {
 };
 
 export default Invoices;
+
+
+

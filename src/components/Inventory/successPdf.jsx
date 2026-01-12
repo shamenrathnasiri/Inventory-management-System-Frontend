@@ -43,7 +43,7 @@ function PdfPreviewModal({
         <button
           onClick={onClose}
           aria-label="Close preview"
-          className="absolute top-3 right-3 z-50 p-2 sm:p-2.5 bg-white/95 hover:bg-white rounded-full shadow-lg border border-slate-200 text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="absolute top-3 right-3 z-50 p-2 sm:p-2.5 bg-white/95 hover:bg-white rounded-full shadow-lg border border-slate-200 text-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500"
         >
           <X className="w-5 h-5" />
         </button>
@@ -51,8 +51,8 @@ function PdfPreviewModal({
           <div className="flex-1 flex flex-col border-b lg:border-b-0 lg:border-r border-slate-200">
           <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-gradient-to-r from-slate-50 to-white">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <FileText className="w-6 h-6 text-blue-600" />
+              <div className="p-2 bg-red-100 rounded-lg">
+                <FileText className="w-6 h-6 text-red-600" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-slate-900">
@@ -74,7 +74,7 @@ function PdfPreviewModal({
                 />
               ) : (
                 <div className="flex items-center justify-center h-full">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
                 </div>
               )}
             </div>
@@ -97,18 +97,18 @@ function PdfPreviewModal({
               
               <button
                 onClick={onDownload}
-                className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-200 rounded-xl transition-all duration-200 group"
+                className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-red-50 to-rose-50 hover:from-red-100 hover:to-rose-100 border border-red-200 rounded-xl transition-all duration-200 group"
               >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200">
-                    <Download className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 bg-red-100 rounded-lg group-hover:bg-red-200">
+                    <Download className="w-5 h-5 text-red-600" />
                   </div>
                   <div className="text-left">
-                    <p className="font-semibold text-blue-900">Download PDF</p>
-                    <p className="text-sm text-blue-700">Save to your device</p>
+                    <p className="font-semibold text-red-900">Download PDF</p>
+                    <p className="text-sm text-red-700">Save to your device</p>
                   </div>
                 </div>
-                <span className="text-xs font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
+                <span className="text-xs font-medium bg-red-100 text-red-800 px-3 py-1 rounded-full">
                   Recommended
                 </span>
               </button>
@@ -132,14 +132,14 @@ function PdfPreviewModal({
                     window.open(pdfUrl, '_blank');
                   }
                 }}
-                className="w-full flex items-center gap-3 p-4 bg-gradient-to-r from-purple-50 to-violet-50 hover:from-purple-100 hover:to-violet-100 border border-purple-200 rounded-xl transition-all duration-200"
+                className="w-full flex items-center gap-3 p-4 bg-gradient-to-r from-rose-50 to-violet-50 hover:from-rose-100 hover:to-violet-100 border border-rose-200 rounded-xl transition-all duration-200"
               >
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <ExternalLink className="w-5 h-5 text-purple-600" />
+                <div className="p-2 bg-rose-100 rounded-lg">
+                  <ExternalLink className="w-5 h-5 text-rose-600" />
                 </div>
                 <div className="text-left">
-                  <p className="font-semibold text-purple-900">Open in New Tab</p>
-                  <p className="text-sm text-purple-700">View in browser</p>
+                  <p className="font-semibold text-rose-900">Open in New Tab</p>
+                  <p className="text-sm text-rose-700">View in browser</p>
                 </div>
               </button>
 
@@ -645,3 +645,4 @@ export default function SuccessPdf() {
   const pdfUrl = query.get("url");
   return <SuccessPdfView pdfUrl={pdfUrl} />;
 }
+

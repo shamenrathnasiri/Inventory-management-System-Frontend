@@ -1369,9 +1369,9 @@ const Invoices = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2 uppercase">
                 Invoice
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                 Invoice Number :{" "}
-                <span className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+                <span className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                   {nextInvoiceId}
                 </span>
               </div>
@@ -1400,7 +1400,7 @@ const Invoices = () => {
                     title="Invoice date is auto-set and cannot be changed"
                     aria-invalid={!!errors.date}
                     aria-describedby={errors.date ? "date-error" : undefined}
-                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 ${
                       errors.date
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50"
@@ -1424,7 +1424,7 @@ const Invoices = () => {
                     value={formData.center}
                     onChange={(e) => handleCenterChange(e.target.value)}
                     disabled={loading.centers}
-                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 bg-white ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 bg-white ${
                       errors.center
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50"
@@ -1463,7 +1463,7 @@ const Invoices = () => {
                         ? "customer-error"
                         : undefined
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 bg-white ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 bg-white ${
                       errors.customer || errors.customerEmail
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50"
@@ -1531,7 +1531,7 @@ const Invoices = () => {
                         refNumber: e.target.value,
                       }))
                     }
-                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400"
+                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400"
                     placeholder="Enter reference number"
                   />
                 </div>
@@ -1598,7 +1598,7 @@ const Invoices = () => {
                   <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
                     <input
                       type="checkbox"
-                      className="h-4 w-4 text-blue-600 border-slate-300 rounded"
+                      className="h-4 w-4 text-red-600 border-slate-300 rounded"
                       checked={isBatchEnabled}
                       onChange={(e) => handleBatchModeChange(e.target.checked)}
                     />
@@ -1684,7 +1684,7 @@ const Invoices = () => {
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
                         disabled={!formData.center || loading.products}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                           errors.productName
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white hover:border-slate-400"
@@ -1705,7 +1705,7 @@ const Invoices = () => {
                         <ul className="absolute z-20 mt-2 w-full max-h-60 overflow-auto rounded-lg border-2 border-slate-200 bg-white shadow-xl">
                           {loading.products ? (
                             <li className="px-4 py-3 text-slate-600 text-sm flex items-center gap-2">
-                              <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-blue-500 border-t-transparent"></span>
+                              <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-red-500 border-t-transparent"></span>
                               Loading products…
                             </li>
                           ) : (
@@ -1714,7 +1714,7 @@ const Invoices = () => {
                                 key={p.id}
                                 className={`px-4 py-3 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-b-0 ${
                                   idx === activeIndex
-                                    ? "bg-blue-50 border-blue-200"
+                                    ? "bg-red-50 border-red-200"
                                     : "hover:bg-slate-50"
                                 }`}
                                 onMouseEnter={() => setActiveIndex(idx)}
@@ -1774,7 +1774,7 @@ const Invoices = () => {
                           quantity: parseInt(e.target.value) || 0,
                         }))
                       }
-                      className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 ${
+                      className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 ${
                         errors.quantity
                           ? "border-red-300 bg-red-50"
                           : "border-slate-300 bg-white"
@@ -1804,7 +1804,7 @@ const Invoices = () => {
                             batchNumber: e.target.value,
                           }))
                         }
-                        className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg transition-all duration-200 focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 ${
                           errors.batchNumber
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white"
@@ -1930,7 +1930,7 @@ const Invoices = () => {
                                             )
                                           }
                                           aria-label={`Batch number for ${it.name}`}
-                                          className="w-32 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                          className="w-32 px-3 py-2 border-2 border-slate-300 rounded-lg text-left focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                           placeholder="Batch"
                                         />
                                       )}
@@ -1949,7 +1949,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`Quantity for ${it.name}`}
-                                      className="w-20 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                      className="w-20 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                     />
                                   </td>
                                   <td className="px-4 sm:px-6 py-4 text-right whitespace-nowrap">
@@ -1966,7 +1966,7 @@ const Invoices = () => {
                                         )
                                       }
                                       aria-label={`Unit price for ${it.name}`}
-                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                     />
                                   </td>
 
@@ -1995,7 +1995,7 @@ const Invoices = () => {
                                             ? "Enable discount in this row to edit"
                                             : undefined
                                         }
-                                        className={`w-24 px-3 py-2 border-2 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors disabled:opacity-60 ${
+                                        className={`w-24 px-3 py-2 border-2 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors disabled:opacity-60 ${
                                           !it.discountEnabled
                                             ? "bg-slate-100 text-slate-400 cursor-not-allowed border-slate-200"
                                             : "border-slate-300 bg-slate-50 hover:bg-white"
@@ -2037,7 +2037,7 @@ const Invoices = () => {
                     loading.customers ||
                     loading.products
                   }
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -2077,7 +2077,7 @@ const Invoices = () => {
           <div className="space-y-4">
             {isSalesOrderLoading ? (
               <div className="flex items-center justify-center gap-3 text-slate-600">
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-red-600 border-t-transparent" />
                 Loading sales orders…
               </div>
             ) : salesOrderOptions.length ? (
@@ -2106,7 +2106,7 @@ const Invoices = () => {
                       type="button"
                       key={voucher || `order-${idx}`}
                       onClick={() => applySalesOrderToInvoice(order)}
-                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-red-400 hover:bg-red-50 transition-colors"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div>
@@ -2247,7 +2247,7 @@ const Invoices = () => {
             aria-live="polite"
           >
             <div className="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 border border-slate-200">
-              <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+              <div className="animate-spin rounded-full h-6 w-6 border-2 border-red-600 border-t-transparent"></div>
               <span className="text-slate-800 font-medium">
                 Creating invoice…
               </span>
@@ -2271,3 +2271,5 @@ const Invoices = () => {
 };
 
 export default Invoices;
+
+

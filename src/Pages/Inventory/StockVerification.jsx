@@ -597,7 +597,7 @@ const StockVerification = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 uppercase">
                 Stock Verification Management
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                 Verification ID:{" "}
                 <span>
                   {isFetchingNextId
@@ -638,7 +638,7 @@ const StockVerification = () => {
                     }
                     aria-invalid={!!errors.date}
                     aria-describedby={errors.date ? "date-error" : undefined}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.date
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -671,7 +671,7 @@ const StockVerification = () => {
                       }));
                     }}
                     disabled={centersLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.fromCenter
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -774,7 +774,7 @@ const StockVerification = () => {
                         onBlur={() => {
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                           errors.productName
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white hover:border-slate-400"
@@ -788,7 +788,7 @@ const StockVerification = () => {
                               key={p.id}
                               className={`px-4 py-3 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-b-0 ${
                                 idx === activeIndex
-                                  ? "bg-blue-50 border-blue-200"
+                                  ? "bg-red-50 border-red-200"
                                   : "hover:bg-slate-50"
                               }`}
                               onMouseEnter={() => setActiveIndex(idx)}
@@ -927,7 +927,7 @@ const StockVerification = () => {
                                       )
                                     }
                                     aria-label={`Quantity for ${it.name}`}
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-center whitespace-nowrap">
@@ -955,7 +955,7 @@ const StockVerification = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || isFetchingNextId || !nextStId}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -992,3 +992,5 @@ const StockVerification = () => {
 
 
 export default StockVerification;
+
+

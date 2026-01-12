@@ -74,8 +74,8 @@ const DashboardStats = () => {
                 {stat.change} from last month
               </p>
             </div>
-            <div className="bg-blue-100 p-4 rounded-2xl shadow-lg">
-              <stat.icon className="h-8 w-8 text-blue-600" />
+            <div className="bg-red-100 p-4 rounded-2xl shadow-lg">
+              <stat.icon className="h-8 w-8 text-red-600" />
             </div>
           </div>
         </div>
@@ -90,41 +90,41 @@ const QuickActions = ({ setActiveItem }) => {
       icon: Package,
       label: "Products",
       action: "product",
-      color: "from-blue-500 to-blue-600",
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600",
+      color: "from-red-500 to-red-600",
+      iconBg: "bg-red-100",
+      iconColor: "text-red-600",
     },
     {
       icon: ShoppingCart,
       label: "Sales Order",
       action: "salesOrder",
-      color: "from-green-500 to-green-600",
-      iconBg: "bg-green-100",
-      iconColor: "text-green-600",
+      color: "from-red-400 to-red-500",
+      iconBg: "bg-red-100",
+      iconColor: "text-red-600",
     },
     {
       icon: TrendingUp,
       label: "Purchase Order",
       action: "purchaseOrder",
-      color: "from-yellow-500 to-yellow-600",
-      iconBg: "bg-yellow-100",
-      iconColor: "text-yellow-600",
+      color: "from-rose-500 to-rose-600",
+      iconBg: "bg-rose-100",
+      iconColor: "text-rose-600",
     },
     {
       icon: Package,
       label: "GRN",
       action: "grn",
-      color: "from-purple-500 to-purple-600",
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-600",
+      color: "from-red-600 to-red-700",
+      iconBg: "bg-red-100",
+      iconColor: "text-red-600",
     },
     {
       icon: AlertTriangle,
       label: "Stock Verification",
       action: "stockVerification",
-      color: "from-pink-500 to-pink-600",
-      iconBg: "bg-pink-100",
-      iconColor: "text-pink-600",
+      color: "from-rose-400 to-rose-500",
+      iconBg: "bg-rose-100",
+      iconColor: "text-rose-600",
     },
   ];
 
@@ -255,7 +255,7 @@ const Dashboard = ({ user, onLogout }) => {
               </div>
               <div className="hidden lg:flex items-center">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                     <Package className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-xl font-bold text-gray-900">
@@ -266,7 +266,7 @@ const Dashboard = ({ user, onLogout }) => {
               <div className="flex items-center gap-4">
                 <span className="text-gray-700 flex items-center gap-2">
                   Welcome, {user.name}
-                  <span className="inline-flex items-center gap-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                  <span className="inline-flex items-center gap-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
                     <svg
                       className="w-4 h-4"
                       fill="currentColor"

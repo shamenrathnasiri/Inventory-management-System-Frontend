@@ -675,7 +675,7 @@ const SalesOrder = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 uppercase">
                 Sales Order Management
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                 Order ID: {nextLoading ? "Loading..." : nextSONumber || "—"}
               </div>
               <p className="text-slate-600 mt-2 text-sm sm:text-base">
@@ -699,7 +699,7 @@ const SalesOrder = () => {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, date: e.target.value }))
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.date
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -729,7 +729,7 @@ const SalesOrder = () => {
                       }));
                     }}
                     disabled={loading.centers}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.center
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -771,7 +771,7 @@ const SalesOrder = () => {
                         customerTelephone: selectedCustomer?.telephone || "",
                       }));
                     }}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.customer
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -818,7 +818,7 @@ const SalesOrder = () => {
                       setForm((p) => ({ ...p, refNumber: e.target.value }))
                     }
                     placeholder="Enter reference number"
-                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-colors"
+                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-colors"
                   />
                 </div>
                 <div className="lg:place-self-end pr-65 text-center bg-slate-100 rounded-lg p-4 border border-slate-200">
@@ -940,7 +940,7 @@ const SalesOrder = () => {
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
                         disabled={!selectedCenterId || loading.products}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                           errors.productName
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white hover:border-slate-400"
@@ -966,7 +966,7 @@ const SalesOrder = () => {
                                 key={p.id}
                                 className={`px-4 py-3 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-b-0 ${
                                   idx === activeIndex
-                                    ? "bg-blue-50 border-blue-200"
+                                    ? "bg-red-50 border-red-200"
                                     : "hover:bg-slate-50"
                                 }`}
                                 onMouseEnter={() => setActiveIndex(idx)}
@@ -1104,7 +1104,7 @@ const SalesOrder = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm text-slate-700 whitespace-nowrap font-medium">
@@ -1129,7 +1129,7 @@ const SalesOrder = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm font-semibold text-slate-900 text-right whitespace-nowrap">
@@ -1154,7 +1154,7 @@ const SalesOrder = () => {
                                         : undefined
                                     }
                                     placeholder="0 or 10%"
-                                    className={`w-24 px-3 py-2 border-2 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors disabled:opacity-60 ${
+                                    className={`w-24 px-3 py-2 border-2 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors disabled:opacity-60 ${
                                       !it.discountEnabled
                                         ? "bg-slate-100 text-slate-400 cursor-not-allowed border-slate-200"
                                         : "border-slate-300 bg-slate-50 hover:bg-white"
@@ -1189,7 +1189,7 @@ const SalesOrder = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -1227,7 +1227,7 @@ const SalesOrder = () => {
           aria-live="polite"
         >
           <div className="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 border border-slate-200">
-            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-red-600 border-t-transparent"></div>
             <span className="text-slate-800 font-medium">
               Creating sales order…
             </span>
@@ -1287,3 +1287,5 @@ const SalesOrder = () => {
 };
 
 export default SalesOrder;
+
+

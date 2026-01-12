@@ -1148,7 +1148,7 @@ const SalesReturn = () => {
               <h1 className="uppercase text-2xl sm:text-3xl font-bold text-slate-900">
                 Sales Return Management
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                 Sales Return Number: {nextSONumber}
               </div>
               <p className="text-slate-600 mt-2 text-sm sm:text-base">
@@ -1175,7 +1175,7 @@ const SalesReturn = () => {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, date: e.target.value }))
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.date
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -1207,7 +1207,7 @@ const SalesReturn = () => {
                       }));
                     }}
                     disabled={centerLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.center
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -1244,7 +1244,7 @@ const SalesReturn = () => {
                       type="button"
                       onClick={handleInvoiceLinkClick}
                       disabled={!selectedCenterId || !form.customer}
-                      className="text-xs font-semibold text-blue-600 hover:text-blue-800 disabled:text-slate-400 disabled:cursor-not-allowed"
+                      className="text-xs font-semibold text-red-600 hover:text-red-800 disabled:text-slate-400 disabled:cursor-not-allowed"
                       title={
                         selectedCenterId && form.customer
                           ? "Load invoices for this customer"
@@ -1272,7 +1272,7 @@ const SalesReturn = () => {
                         telephone: meta?.telephone || meta?.customerTelephone || "",
                       }));
                     }}
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                       errors.customer
                         ? "border-red-300 bg-red-50"
                         : "border-slate-300 bg-slate-50 hover:border-slate-400"
@@ -1322,7 +1322,7 @@ const SalesReturn = () => {
                       setForm((p) => ({ ...p, refNumber: e.target.value }))
                     }
                     placeholder="Enter reference number"
-                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 transition-colors"
+                    className="w-full px-4 py-3 border-2 border-slate-300 bg-slate-50 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 hover:border-slate-400 transition-colors"
                   />
                 </div>
 
@@ -1441,7 +1441,7 @@ const SalesReturn = () => {
                           // Delay hiding to allow click selection
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors ${
                           errors.productName
                             ? "border-red-300 bg-red-50"
                             : "border-slate-300 bg-white hover:border-slate-400"
@@ -1455,7 +1455,7 @@ const SalesReturn = () => {
                               key={p.id}
                               className={`px-4 py-3 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-b-0 ${
                                 idx === activeIndex
-                                  ? "bg-blue-50 border-blue-200"
+                                  ? "bg-red-50 border-red-200"
                                   : "hover:bg-slate-50"
                               }`}
                               onMouseEnter={() => setActiveIndex(idx)}
@@ -1507,7 +1507,7 @@ const SalesReturn = () => {
                             }))
                           }
                           placeholder="Enter batch number"
-                          className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          className="w-full px-4 py-2 border-2 border-slate-300 rounded-lg bg-white focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
                         />
                       </div>
                     )}
@@ -1599,7 +1599,7 @@ const SalesReturn = () => {
                                     value={it.unitPrice}
                                     readOnly
                                     disabled
-                                    className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50"
+                                    className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm text-slate-700 whitespace-nowrap font-medium">
@@ -1617,7 +1617,7 @@ const SalesReturn = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                   <td className="px-4 sm:px-6 py-4 text-right whitespace-nowrap">
@@ -1634,7 +1634,7 @@ const SalesReturn = () => {
                                     placeholder="0 or 5%"
                                       readOnly={it.discountEditable === false}
                                       disabled={it.discountEditable === false}
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm font-bold text-slate-900 text-right whitespace-nowrap">
@@ -1666,7 +1666,7 @@ const SalesReturn = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -1701,7 +1701,7 @@ const SalesReturn = () => {
           <div className="space-y-4">
             {isInvoiceLoading ? (
               <div className="flex items-center justify-center gap-3 text-slate-600">
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent" />
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-red-600 border-t-transparent" />
                 Loading invoices…
               </div>
             ) : invoiceOptions.length ? (
@@ -1738,7 +1738,7 @@ const SalesReturn = () => {
                       type="button"
                       key={voucher || `invoice-${idx}`}
                       onClick={() => applyInvoiceToReturn(invoice)}
-                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-blue-400 hover:bg-blue-50 transition-colors"
+                      className="w-full text-left border-2 border-slate-200 rounded-lg p-4 hover:border-red-400 hover:bg-red-50 transition-colors"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div>
@@ -1806,7 +1806,7 @@ const SalesReturn = () => {
           aria-live="polite"
         >
           <div className="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 border border-slate-200">
-            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-red-600 border-t-transparent"></div>
             <span className="text-slate-800 font-medium">
               Creating sales return…
             </span>
@@ -1902,3 +1902,5 @@ const SalesReturn = () => {
 };
 
 export default SalesReturn;
+
+

@@ -712,7 +712,7 @@ const PurchaseOrder = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 uppercase">
                 Purchase Order
               </h1>
-              <div className="text-blue-600 font-semibold mt-2 text-lg sm:text-xl">
+              <div className="text-red-600 font-semibold mt-2 text-lg sm:text-xl">
                 Purchase Order Number :{" "}
                 {isFetchingNext ? "Loading…" : nextPONumber || "Unavailable"}
               </div>
@@ -739,7 +739,7 @@ const PurchaseOrder = () => {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, date: e.target.value }))
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white ${
                       errors.date ? "border-red-500" : "border-slate-300"
                     }`}
                   />
@@ -756,7 +756,7 @@ const PurchaseOrder = () => {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, center: e.target.value }))
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white ${
                       errors.center ? "border-red-500" : "border-slate-300"
                     }`}
                     disabled={loading.centers}
@@ -784,7 +784,7 @@ const PurchaseOrder = () => {
                     onChange={(e) =>
                       setForm((p) => ({ ...p, supplier: e.target.value }))
                     }
-                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white ${
                       errors.supplier ? "border-red-500" : "border-slate-300"
                     }`}
                     disabled={loading.suppliers}
@@ -834,7 +834,7 @@ const PurchaseOrder = () => {
                       setForm((p) => ({ ...p, refNumber: e.target.value }))
                     }
                     placeholder="Enter reference number"
-                    className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                    className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                   />
                 </div>
                 <div className="lg:place-self-end pr-65 text-center bg-slate-100 rounded-lg p-4 border border-slate-200">
@@ -861,7 +861,7 @@ const PurchaseOrder = () => {
                     <label className="flex items-center gap-3 text-sm font-medium text-slate-700">
                       <input
                         type="checkbox"
-                        className="h-4 w-4 text-blue-600 border-slate-300 rounded"
+                        className="h-4 w-4 text-red-600 border-slate-300 rounded"
                         checked={isBatchEnabled}
                         onChange={(e) => handleBatchModeChange(e.target.checked)}
                       />
@@ -938,7 +938,7 @@ const PurchaseOrder = () => {
                           // Delay hiding to allow click selection
                           setTimeout(() => setShowSuggestions(false), 150);
                         }}
-                        className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white hover:border-slate-400 ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white hover:border-slate-400 ${
                           errors.productName
                             ? "border-red-500"
                             : "border-slate-300"
@@ -952,7 +952,7 @@ const PurchaseOrder = () => {
                               key={p.id}
                               className={`px-4 py-3 cursor-pointer flex justify-between items-center border-b border-slate-100 last:border-b-0 ${
                                 idx === activeIndex
-                                  ? "bg-blue-50 border-blue-200"
+                                  ? "bg-red-50 border-red-200"
                                   : "hover:bg-slate-50"
                               } transition-colors`}
                               onMouseEnter={() => setActiveIndex(idx)}
@@ -1006,7 +1006,7 @@ const PurchaseOrder = () => {
                           setEntry((p) => ({ ...p, batchNumber: e.target.value }))
                         }
                         placeholder={"Enter batch number"}
-                        className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white hover:border-slate-400"
+                        className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white hover:border-slate-400"
                       />
                     </div>
                   )}
@@ -1100,7 +1100,7 @@ const PurchaseOrder = () => {
                                         )
                                       }
                                       placeholder={"Required"}
-                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                      className="w-28 px-3 py-2 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                     />
                                   </td>
                                 )}
@@ -1122,7 +1122,7 @@ const PurchaseOrder = () => {
                                       className={`w-28 px-3 py-2 border-2 rounded-lg text-right focus:outline-none focus:ring-2 transition-colors bg-slate-50 hover:bg-white ${
                                         it?.attemptedOverMrp
                                           ? "border-red-500 focus:ring-red-500"
-                                          : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
+                                          : "border-slate-300 focus:ring-red-500 focus:border-red-500"
                                       }`}
                                     />
                                     {it?.attemptedOverMrp && (
@@ -1146,7 +1146,7 @@ const PurchaseOrder = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm font-semibold text-slate-900 text-right whitespace-nowrap">
@@ -1164,7 +1164,7 @@ const PurchaseOrder = () => {
                                       )
                                     }
                                     placeholder="0 or 10%"
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-slate-50 hover:bg-white"
+                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-slate-50 hover:bg-white"
                                   />
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm font-bold text-slate-900 text-right whitespace-nowrap">
@@ -1203,7 +1203,7 @@ const PurchaseOrder = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
+                  className="px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg flex items-center justify-center gap-3 shadow-lg w-full sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -1241,7 +1241,7 @@ const PurchaseOrder = () => {
           aria-live="polite"
         >
           <div className="bg-white rounded-xl shadow-xl p-6 flex items-center gap-4 border border-slate-200">
-            <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-red-600 border-t-transparent"></div>
             <span className="text-slate-800 font-medium">
               Creating purchase order…
             </span>
@@ -1301,3 +1301,5 @@ const PurchaseOrder = () => {
 };
 
 export default PurchaseOrder;
+
+

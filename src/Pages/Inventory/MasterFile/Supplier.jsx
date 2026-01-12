@@ -271,7 +271,7 @@ const Supplier = () => {
                   <p className="text-sm text-gray-500 mt-2">Add your first supplier to get started.</p>
                   <button
                     onClick={() => setShowForm(true)}
-                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                    className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm font-medium"
                   >
                     + Add Supplier
                   </button>
@@ -282,7 +282,7 @@ const Supplier = () => {
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <CreditCard className="h-4 w-4 text-blue-500" />
+                          <CreditCard className="h-4 w-4 text-red-500" />
                           <h3 className="text-sm font-semibold text-gray-900">
                             {supplier.supplierName}
                           </h3>
@@ -299,7 +299,7 @@ const Supplier = () => {
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleEdit(supplier)}
-                          className="text-indigo-600 hover:text-indigo-900 p-1"
+                          className="text-red-600 hover:text-red-900 p-1"
                           title="Edit Supplier"
                         >
                           <Edit className="h-4 w-4" />
@@ -378,7 +378,7 @@ const Supplier = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {suppliers.map((supplier) => (
-                    <tr key={supplier.id} className="hover:bg-blue-50 transition-colors">
+                    <tr key={supplier.id} className="hover:bg-red-50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {supplier.supplierName}
                       </td>
@@ -399,7 +399,7 @@ const Supplier = () => {
                         {Number(supplier.creditValue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                           {supplier.creditPeriod} days
                         </span>
                       </td>
@@ -407,7 +407,7 @@ const Supplier = () => {
                         <div className="flex items-center justify-center gap-3">
                           <button
                             onClick={() => handleEdit(supplier)}
-                            className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                            className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
                           >
                             <Edit className="h-3 w-3 mr-1" />
                             Edit
@@ -469,7 +469,7 @@ const Supplier = () => {
                   required
                   disabled={saving}
                   placeholder="Enter supplier name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.supplierName && <p className="text-sm text-red-600 mt-1">{errors.supplierName}</p>}
               </div>
@@ -489,7 +489,7 @@ const Supplier = () => {
                   onKeyDown={(e) => {
                     if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') e.preventDefault();
                   }}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.phoneNumber && <p className="text-sm text-red-600 mt-1">{errors.phoneNumber}</p>}
               </div>
@@ -508,7 +508,7 @@ const Supplier = () => {
                   required
                   disabled={saving}
                   placeholder="Enter NIC number"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.nic && <p className="text-sm text-red-600 mt-1">{errors.nic}</p>}
               </div>
@@ -524,7 +524,7 @@ const Supplier = () => {
                   onChange={handleInputChange}
                   disabled={saving}
                   placeholder="Enter email address"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
               </div>
@@ -548,7 +548,7 @@ const Supplier = () => {
                   required
                   disabled={saving}
                   placeholder="Enter primary address"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.address1 && <p className="text-sm text-red-600 mt-1">{errors.address1}</p>}
               </div>
@@ -564,7 +564,7 @@ const Supplier = () => {
                   onChange={handleInputChange}
                   disabled={saving}
                   placeholder="Enter secondary address (optional)"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 {errors.address2 && <p className="text-sm text-red-600 mt-1">{errors.address2}</p>}
               </div>
@@ -591,7 +591,7 @@ const Supplier = () => {
                     disabled={saving}
                     placeholder="0.00"
                     onKeyDown={(e) => { if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') e.preventDefault(); }}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   {errors.creditValue && <p className="text-sm text-red-600 mt-1">{errors.creditValue}</p>}
                 </div>
@@ -609,7 +609,7 @@ const Supplier = () => {
                     disabled={saving}
                     placeholder="30"
                     onKeyDown={(e) => { if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') e.preventDefault(); }}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent text-base disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   {errors.creditPeriod && <p className="text-sm text-red-600 mt-1">{errors.creditPeriod}</p>}
                 </div>
@@ -650,7 +650,7 @@ const Supplier = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full sm:w-auto px-8 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-8 py-2.5 bg-red-600 text-white rounded-lg hover:bg-red-700 font-medium shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {saving ? (
                     <>
@@ -671,4 +671,6 @@ const Supplier = () => {
 };
 
 export default Supplier;
+
+
 

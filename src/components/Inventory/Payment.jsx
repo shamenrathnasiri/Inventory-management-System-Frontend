@@ -96,7 +96,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 			>
 				<label className="inline-flex items-center gap-2 cursor-pointer select-none">
 					<input
-						className="size-4 accent-blue-600"
+						className="size-4 accent-red-600"
 						type="radio"
 						name="payment-mode"
 						value="cash"
@@ -107,7 +107,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 				</label>
 				<label className="inline-flex items-center gap-2 cursor-pointer select-none">
 					<input
-						className="size-4 accent-blue-600"
+						className="size-4 accent-red-600"
 						type="radio"
 						name="payment-mode"
 						value="online"
@@ -118,7 +118,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 				</label>
 				<label className="inline-flex items-center gap-2 cursor-pointer select-none">
 					<input
-						className="size-4 accent-blue-600"
+						className="size-4 accent-red-600"
 						type="radio"
 						name="payment-mode"
 						value="cheque"
@@ -143,7 +143,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 							placeholder="0.00"
 							aria-invalid={amountInvalid}
 							className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-								amountInvalid ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+								amountInvalid ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 							}`}
 						/>
 						{showErrors && amountInvalid ? (
@@ -159,7 +159,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 							value={note}
 							onChange={(e) => setNote(e.target.value)}
 							placeholder="Add a note"
-							className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+							className="w-full px-3 py-2 rounded-md border border-gray-300 text-sm outline-none focus:ring-2 focus:ring-red-500"
 						/>
 					</div>
 				</div>
@@ -183,7 +183,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								placeholder="Enter bank"
 								aria-invalid={onlineInvalids.bankName}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									onlineInvalids.bankName ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									onlineInvalids.bankName ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && onlineInvalids.bankName && (
@@ -199,7 +199,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								placeholder="Transaction reference"
 								aria-invalid={onlineInvalids.referenceNo}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									onlineInvalids.referenceNo ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									onlineInvalids.referenceNo ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && onlineInvalids.referenceNo && (
@@ -214,7 +214,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								onChange={(e) => setTransferDate(e.target.value)}
 								aria-invalid={onlineInvalids.transferDate}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									onlineInvalids.transferDate ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									onlineInvalids.transferDate ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && onlineInvalids.transferDate && (
@@ -237,7 +237,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								placeholder="Cheque number"
 								aria-invalid={chequeInvalids.chequeNo}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									chequeInvalids.chequeNo ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									chequeInvalids.chequeNo ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && chequeInvalids.chequeNo && (
@@ -253,7 +253,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								placeholder="Bank name"
 								aria-invalid={chequeInvalids.chequeBank}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									chequeInvalids.chequeBank ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									chequeInvalids.chequeBank ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && chequeInvalids.chequeBank && (
@@ -268,7 +268,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 								onChange={(e) => setChequeDate(e.target.value)}
 								aria-invalid={chequeInvalids.chequeDate}
 								className={`w-full px-3 py-2 rounded-md border text-sm outline-none transition ${
-									chequeInvalids.chequeDate ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-blue-500"
+									chequeInvalids.chequeDate ? "border-red-500" : "border-gray-300 focus:ring-2 focus:ring-red-500"
 								}`}
 							/>
 							{showErrors && chequeInvalids.chequeDate && (
@@ -284,7 +284,7 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 					type="button"
 					onClick={handleSetPayment}
 					title={!isValid ? "Fill required fields" : undefined}
-					className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg"
+					className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg"
 				>
 					Set Payment
 				</button>
@@ -292,4 +292,5 @@ export default function Payment({ onSetPayment, initialMode = "cash" }) {
 		</div>
 	);
 }
+
 

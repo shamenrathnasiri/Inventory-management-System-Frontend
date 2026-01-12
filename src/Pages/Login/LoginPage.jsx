@@ -31,7 +31,7 @@ function LoginPage({ onSuccess }) {
   const [fieldErrors, setFieldErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [, setMounted] = useState(false);
   const [currentYear] = useState(new Date().getFullYear());
   const [focusedField, setFocusedField] = useState(null);
 
@@ -119,11 +119,9 @@ function LoginPage({ onSuccess }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div className="w-12 h-12 rounded-xl bg-linear-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-lg shadow-red-500/30">
-            <Package className="w-7 h-7 text-white" />
-          </div>
-          <span className="text-2xl font-bold text-white">
-            Invent<span className="text-red-500">ory</span>
+         
+          <span className="text-2xl font-bold text-white ">
+            INVENTORY<span className="text-red-500"> SYSTEM</span>
           </span>
         </motion.div>
 
@@ -378,21 +376,8 @@ function LoginPage({ onSuccess }) {
                   )}
                 </AnimatePresence>
 
-                {/* Remember & Forgot */}
-                {isLogin && (
-                  <div className="flex items-center justify-between text-sm">
-                    <label className="flex items-center gap-2 cursor-pointer group">
-                      <input 
-                        type="checkbox" 
-                        className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-red-500 focus:ring-red-500/50 focus:ring-offset-0"
-                      />
-                      <span className="text-slate-400 group-hover:text-slate-300 transition-colors">Remember me</span>
-                    </label>
-                    <a href="#" className="text-red-400 hover:text-red-300 transition-colors font-medium">
-                      Forgot password?
-                    </a>
-                  </div>
-                )}
+            
+                
 
                 {/* Submit Button */}
                 <motion.button

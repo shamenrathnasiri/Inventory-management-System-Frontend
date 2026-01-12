@@ -231,27 +231,27 @@ const Customer = () => {
             placeholder="Search customers..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+            className="w-full sm:w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <button
             onClick={() => setShowCreateForm(true)}
-            className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
+            className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
           >
             <Plus className="h-4 w-4" />
             Create Customer
           </button>
           <button
             onClick={() => setShowCategoryModal(true)}
-            className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
+            className="w-full sm:w-auto bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
           >
             <Plus className="h-4 w-4" />
             Customer Category
           </button>
           <button
             onClick={() => setShowTypeModal(true)}
-            className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
+            className="w-full sm:w-auto bg-red-400 hover:bg-red-500 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm md:text-base"
           >
             <Plus className="h-4 w-4" />
             Customer Type
@@ -283,7 +283,7 @@ const Customer = () => {
                     <div className="flex items-center gap-2 ml-2">
                       <button 
                         onClick={() => handleEdit(customer)}
-                        className="text-indigo-600 hover:text-indigo-900 p-1"
+                        className="text-red-600 hover:text-red-900 p-1"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
@@ -391,7 +391,7 @@ const Customer = () => {
                         <div className="flex items-center gap-2">
                           <button 
                             onClick={() => handleEdit(customer)}
-                            className="text-indigo-600 hover:text-indigo-900"
+                            className="text-red-600 hover:text-red-900"
                           >
                             <Edit className="h-4 w-4" />
                           </button>
@@ -454,7 +454,7 @@ const Customer = () => {
                     value={formData.customerCategory}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                   >
                     <option value="">Select Category</option>
                     {customerCategories.map(category => (
@@ -472,7 +472,7 @@ const Customer = () => {
                     value={formData.customerType}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                   >
                     <option value="">Select Type</option>
                     {customerTypes.map(type => (
@@ -492,7 +492,7 @@ const Customer = () => {
                   value={formData.customerName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -506,7 +506,7 @@ const Customer = () => {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                   />
                 </div>
 
@@ -519,7 +519,7 @@ const Customer = () => {
                     name="brNumberNic"
                     value={formData.brNumberNic}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -534,7 +534,7 @@ const Customer = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -547,7 +547,7 @@ const Customer = () => {
                   value={formData.address}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -560,7 +560,7 @@ const Customer = () => {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -587,7 +587,7 @@ const Customer = () => {
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm md:text-base"
                 >
                   {editingCustomer ? 'Update Customer' : 'Create Customer'}
                 </button>
@@ -627,7 +627,7 @@ const Customer = () => {
                   onChange={(e) => setNewCategory(e.target.value)}
                   placeholder="Enter category name"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -644,7 +644,7 @@ const Customer = () => {
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors text-sm md:text-base"
                 >
                   Add Category
                 </button>
@@ -684,7 +684,7 @@ const Customer = () => {
                   onChange={(e) => setNewType(e.target.value)}
                   placeholder="Enter type name"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm md:text-base"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-400 focus:border-transparent text-sm md:text-base"
                 />
               </div>
 
@@ -701,7 +701,7 @@ const Customer = () => {
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm md:text-base"
+                  className="w-full sm:w-auto px-4 py-2 bg-red-400 text-white rounded-lg hover:bg-red-500 transition-colors text-sm md:text-base"
                 >
                   Add Type
                 </button>
@@ -715,3 +715,5 @@ const Customer = () => {
 };
 
 export default Customer;
+
+

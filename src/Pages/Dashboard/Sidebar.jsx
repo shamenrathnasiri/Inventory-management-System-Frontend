@@ -168,7 +168,7 @@ const Sidebar = ({
         <div className="p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-indigo-600 p-2 rounded-lg">
+              <div className="bg-red-600 p-2 rounded-lg">
                 <Package className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -188,7 +188,7 @@ const Sidebar = ({
         {/* User Profile Section */}
         <div className="p-4 border-b border-gray-100 flex-shrink-0">
           <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-            <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center">
               <span className="text-white font-semibold text-sm">
                 {user.name
                   .split(" ")
@@ -233,7 +233,7 @@ const Sidebar = ({
     ${
       activeItem === item.id ||
       item.subItems.some((subItem) => activeItem === subItem.id)
-        ? "bg-indigo-50 text-indigo-700"
+        ? "bg-red-50 text-red-700"
         : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
     }
   `}
@@ -245,7 +245,7 @@ const Sidebar = ({
                                   item.subItems.some(
                                     (subItem) => activeItem === subItem.id
                                   )
-                                    ? "text-indigo-600"
+                                    ? "text-red-600"
                                     : "text-gray-400 group-hover:text-gray-600"
                                 }`}
                               />
@@ -261,7 +261,7 @@ const Sidebar = ({
           ${
             activeItem === item.id ||
             item.subItems.some((subItem) => activeItem === subItem.id)
-              ? "bg-indigo-100 text-indigo-700"
+              ? "bg-red-100 text-red-700"
               : "bg-gray-100 text-gray-600"
           }
         `}
@@ -312,7 +312,7 @@ const Sidebar = ({
                                        subItem.subItems.some(
                                          (s) => activeItem === s.id
                                        )
-                                         ? "bg-indigo-50 text-indigo-700"
+                                         ? "bg-red-50 text-red-700"
                                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                                      }
                                    `}
@@ -346,7 +346,7 @@ const Sidebar = ({
                                              transition-all duration-200
                                              ${
                                                activeItem === subSubItem.id
-                                                 ? "bg-indigo-50 text-indigo-700"
+                                                 ? "bg-red-50 text-red-700"
                                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                                              }
                                            `}
@@ -372,7 +372,7 @@ const Sidebar = ({
                                    transition-all duration-200
                                    ${
                                      activeItem === subItem.id
-                                       ? "bg-indigo-50 text-indigo-700"
+                                       ? "bg-red-50 text-red-700"
                                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                                    }
                                  `}
@@ -397,7 +397,7 @@ const Sidebar = ({
                       transition-all duration-200 group
                       ${
                         activeItem === item.id
-                          ? "bg-indigo-50 text-indigo-700 border-r-2 border-indigo-600"
+                          ? "bg-red-50 text-red-700 border-r-2 border-red-600"
                           : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                       }
                     `}
@@ -405,7 +405,7 @@ const Sidebar = ({
                       <item.icon
                         className={`h-5 w-5 ${
                           activeItem === item.id
-                            ? "text-indigo-600"
+                            ? "text-red-600"
                             : "text-gray-400 group-hover:text-gray-600"
                         }`}
                       />
@@ -416,7 +416,7 @@ const Sidebar = ({
                         px-2 py-0.5 text-xs rounded-full font-medium
                         ${
                           activeItem === item.id
-                            ? "bg-indigo-100 text-indigo-700"
+                            ? "bg-red-100 text-red-700"
                             : "bg-gray-100 text-gray-600"
                         }
                       `}
@@ -441,7 +441,7 @@ const Sidebar = ({
               transition-all duration-200 group
               ${
                 activeItem === "settings"
-                  ? "bg-indigo-50 text-indigo-700"
+                  ? "bg-red-50 text-red-700"
                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
               }
             `}
@@ -449,7 +449,7 @@ const Sidebar = ({
             <Settings
               className={`h-5 w-5 ${
                 activeItem === "settings"
-                  ? "text-indigo-600"
+                  ? "text-red-600"
                   : "text-gray-400 group-hover:text-gray-600"
               }`}
             />

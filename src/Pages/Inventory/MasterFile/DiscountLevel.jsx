@@ -168,7 +168,7 @@ const DiscountLevel = () => {
 				<h1 className="text-4xl font-bold text-gray-800">Discount Level</h1>
 				<button
 					onClick={() => setShowForm(!showForm)}
-					className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition duration-200"
+					className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium transition duration-200"
 				>
 					+ Create Discount Level
 				</button>
@@ -200,7 +200,7 @@ const DiscountLevel = () => {
 										value={formData.name}
 										onChange={handleChange}
 										placeholder="Enter discount level name"
-										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
 										required
 									/>
 								</div>
@@ -211,7 +211,7 @@ const DiscountLevel = () => {
 										type="date"
 										value={formData.date}
 										onChange={handleChange}
-										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
 										required
 									/>
 								</div>
@@ -223,7 +223,7 @@ const DiscountLevel = () => {
 										value={formData.days}
 										onChange={handleChange}
 										placeholder="Enter number of days"
-										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
 										required
 									/>
 								</div>
@@ -236,7 +236,7 @@ const DiscountLevel = () => {
 										value={formData.value}
 										onChange={handleChange}
 										placeholder="Enter discount value"
-										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
 										required
 									/>
 								</div>
@@ -248,7 +248,7 @@ const DiscountLevel = () => {
 									value={formData.description}
 									onChange={handleChange}
 									placeholder="Enter description or notes"
-									className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+									className="w-full border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
 									rows="3"
 								></textarea>
 							</div>
@@ -292,7 +292,7 @@ const DiscountLevel = () => {
 							placeholder="Search discount levels..."
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
-							className="pl-10 border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
+							className="pl-10 border border-gray-300 p-2 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent w-64"
 						/>
 					</div>
 				</div>
@@ -334,7 +334,7 @@ const DiscountLevel = () => {
 										);
 									})
 									.map((level, index) => (
-										<tr key={level.id} className={`hover:bg-blue-50 transition-colors duration-200 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+										<tr key={level.id} className={`hover:bg-red-50 transition-colors duration-200 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
 											<td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{level.id}</td>
 											<td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{level.name}</td>
 											<td className="px-6 py-4 whitespace-nowrap text-gray-700">{formatDateDisplay(level.date)}</td>
@@ -342,7 +342,7 @@ const DiscountLevel = () => {
 											<td className="px-6 py-4 text-gray-700 max-w-xs">
 												<div className="flex items-center justify-between">
 													<span className="truncate flex-1">{level.description ?? ''}</span>
-													<button onClick={() => Swal.fire({ title: 'Description', text: level.description || 'No description available', confirmButtonText: 'Close', width: '400px' })} className="ml-2 text-blue-600 hover:text-blue-800 flex-shrink-0">
+													<button onClick={() => Swal.fire({ title: 'Description', text: level.description || 'No description available', confirmButtonText: 'Close', width: '400px' })} className="ml-2 text-red-600 hover:text-red-800 flex-shrink-0">
 														<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 															<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
 															<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -385,3 +385,4 @@ const DiscountLevel = () => {
 };
 
 export default DiscountLevel;
+

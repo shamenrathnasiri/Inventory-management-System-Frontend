@@ -394,8 +394,8 @@ const ProductList = () => {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div className="mb-4 sm:mb-0">
               <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Package className="h-6 w-6 text-blue-600" />
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <Package className="h-6 w-6 text-red-600" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">
@@ -410,7 +410,7 @@ const ProductList = () => {
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => openModal()}
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-105"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200 transform hover:scale-105"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add New Product
@@ -426,8 +426,8 @@ const ProductList = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-3">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <Package className="h-4 w-4 text-blue-600" />
+              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                <Package className="h-4 w-4 text-red-600" />
               </div>
             </div>
             <div className="pr-12">
@@ -485,12 +485,12 @@ const ProductList = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   autoComplete="off"
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm bg-gray-50 focus:bg-white transition-colors"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 sm:text-sm bg-gray-50 focus:bg-white transition-colors"
                 />
               </div>
             </div>
             <div className="flex gap-2">
-              <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+              <button className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
                 <Filter className="h-4 w-4 mr-2" />
                 Filter
               </button>
@@ -519,7 +519,7 @@ const ProductList = () => {
                 <div className="mt-6">
                   <button
                     onClick={() => openModal()}
-                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
+                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200"
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     Create Your First Product
@@ -582,8 +582,8 @@ const ProductList = () => {
                             }`}
                           ></div>
                           <div className="flex-shrink-0 h-10 w-10">
-                            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                              <Package className="h-5 w-5 text-blue-600" />
+                            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center">
+                              <Package className="h-5 w-5 text-red-600" />
                             </div>
                           </div>
                           <div className="ml-4">
@@ -594,7 +594,7 @@ const ProductList = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap border-r border-gray-200">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                           {product.code}
                         </span>
                       </td>
@@ -645,7 +645,7 @@ const ProductList = () => {
                         <div className="flex items-center space-x-1">
                           <button
                             onClick={() => openModal(product)}
-                            className="inline-flex items-center px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
+                            className="inline-flex items-center px-2 py-1 text-xs font-medium text-red-700 bg-red-100 rounded-md hover:bg-red-200 transition-colors"
                             title="Edit product details"
                           >
                             <Edit className="h-3 w-3 mr-1" />
@@ -673,7 +673,7 @@ const ProductList = () => {
                               checked={product.isActive !== false}
                               onChange={() => handleToggleActive(product.id)}
                             />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
                           </label>
                         </div>
                       </td>
@@ -699,12 +699,12 @@ const ProductList = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-blue-200">
-            <div className="px-6 py-4 border-b border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+          <div className="bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-red-200">
+            <div className="px-6 py-4 border-b border-red-200 bg-gradient-to-r from-red-50 to-rose-50">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-blue-100 rounded-lg border border-blue-300">
-                    <Package className="h-5 w-5 text-blue-600" />
+                  <div className="p-2 bg-red-100 rounded-lg border border-red-300">
+                    <Package className="h-5 w-5 text-red-600" />
                   </div>
                   <h2 className="text-xl font-semibold text-gray-900">
                     {currentProduct
@@ -737,7 +737,7 @@ const ProductList = () => {
                       onKeyDown={(e) => handleKeyDown(e, "name")}
                       required
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                       placeholder="Enter product name"
                     />
                   </div>
@@ -756,7 +756,7 @@ const ProductList = () => {
                       onKeyDown={(e) => handleKeyDown(e, "code")}
                       required
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                       placeholder="Enter product code"
                     />
                   </div>
@@ -781,7 +781,7 @@ const ProductList = () => {
                       }}
                       rows={4}
                       autoComplete="off"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white resize-none"
                       placeholder="Enter product description"
                     />
                   </div>
@@ -794,7 +794,7 @@ const ProductList = () => {
                       name="discountLevel"
                       value={formData.discountLevel}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                     >
                       <option value="">Select Discount Level</option>
                       {discountLevels.map((level) => (
@@ -831,7 +831,7 @@ const ProductList = () => {
                       name="productType"
                       value={formData.productType}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                     >
                       <option value="">Select Product Type</option>
                       {productTypes.map((t) => (
@@ -870,7 +870,7 @@ const ProductList = () => {
                         onChange={handleInputChange}
                         onKeyDown={(e) => handleKeyDown(e, "oemNumbers")}
                         autoComplete="off"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                         placeholder="Enter OEM numbers"
                       />
                     </div>
@@ -887,7 +887,7 @@ const ProductList = () => {
                         onChange={handleInputChange}
                         onKeyDown={(e) => handleKeyDown(e, "barcode")}
                         autoComplete="off"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                         placeholder="Enter barcode"
                       />
                     </div>
@@ -905,7 +905,7 @@ const ProductList = () => {
                           isActive: e.target.checked,
                         }))
                       }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                     />
                     <label
                       htmlFor="isActive"
@@ -931,7 +931,7 @@ const ProductList = () => {
                           step="0.01"
                           min="0"
                           autoComplete="off"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                           placeholder="0.00"
                         />
                       </div>
@@ -950,7 +950,7 @@ const ProductList = () => {
                           step="0.01"
                           min="0"
                           autoComplete="off"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                           placeholder="0.00"
                         />
                       </div>
@@ -969,7 +969,7 @@ const ProductList = () => {
                           step="0.01"
                           min="0"
                           autoComplete="off"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-gray-50 focus:bg-white"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-gray-50 focus:bg-white"
                           placeholder="0.00"
                         />
                       </div>
@@ -988,7 +988,7 @@ const ProductList = () => {
                 </button>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 font-medium shadow-sm"
+                  className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200 font-medium shadow-sm"
                 >
                   {currentProduct ? "Update Product" : "Create Product"}
                 </button>
@@ -1106,3 +1106,6 @@ const ProductList = () => {
 };
 
 export default ProductList;
+
+
+

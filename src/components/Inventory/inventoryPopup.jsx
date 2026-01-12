@@ -55,3 +55,4 @@ const InventoryPopup = ({
 };
 
 export default InventoryPopup;
+
