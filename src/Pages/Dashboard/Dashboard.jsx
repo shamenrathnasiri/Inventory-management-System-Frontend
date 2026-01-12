@@ -32,7 +32,7 @@ import {
   sidebarUtils,
   toggleSidebar,
   closeSidebar,
-  openSidebar,
+  
   isOutsideClick,
   handleBreakpointChange,
 } from "../../utils/SidebarUtils";
@@ -40,9 +40,6 @@ import { getResponsive } from "../../utils/ResponsiveUtils";
 
 const STORAGE_KEY = "employeeFormData";
 
-const clearForm = () => {
-  localStorage.removeItem(STORAGE_KEY);
-};
 
 const DashboardStats = () => {
   const stats = [
@@ -198,9 +195,6 @@ const Dashboard = ({ user, onLogout }) => {
     toggleSidebar();
   };
 
-  const close = () => {
-    closeSidebar();
-  };
 
   const location = useLocation();
   const navigate = useNavigate();
