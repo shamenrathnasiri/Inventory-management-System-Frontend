@@ -236,22 +236,23 @@ const Supplier = () => {
     })();
   };
 
-  const actions = (
-    <ResponsiveButton
-      variant="primary"
-      size="md"
-      onClick={() => setShowForm(true)}
-    >
-      + Add Supplier
-    </ResponsiveButton>
-  );
-
   return (
-    <ResponsivePageWrapper
-      title="Suppliers"
-      subtitle="Manage supplier information and credit details"
-      actions={actions}
-    >
+    <ResponsivePageWrapper>
+
+      {/* Page Header */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6">
+        <div>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Suppliers</h1>
+          <p className="text-sm text-gray-600">Manage supplier information and credit details</p>
+        </div>
+
+        {!showForm && (
+          <ResponsiveButton onClick={() => setShowForm(true)}>
+            <Plus className="h-4 w-4" />
+            Add Supplier
+          </ResponsiveButton>
+        )}
+      </div>
 
       {/* Suppliers List */}
       {!showForm && (
@@ -347,7 +348,7 @@ const Supplier = () => {
             /* Desktop Table View */
             <div className="overflow-x-auto">
               <table className="min-w-full w-full divide-y divide-gray-200">
-                <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
+                <thead className="bg-linear-to-r from-gray-50 to-gray-100">
                   <tr>
                     <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Supplier Name
