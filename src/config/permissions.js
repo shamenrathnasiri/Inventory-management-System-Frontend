@@ -90,6 +90,10 @@ export const permissions = {
     discountLevel: { view: true, edit: true },
     productType: { view: true, edit: true },
     pendingApprovals: { view: true, edit: true },
+    // Administration - Only admin can manage permissions
+    permissionManagement: { view: true, edit: true },
+    roleManagement: { view: true, edit: true },
+    userManagement: { view: true, edit: true, delete: true, create: true },
   },
   hr: {
     chatbot: { view: true },
