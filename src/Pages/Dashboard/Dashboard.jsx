@@ -25,6 +25,9 @@ import StockTransfer from "../Inventory/StockTransfer";
 import StockVerification from "../Inventory/StockVerification";
 import Pending from "../Inventory/Pending";
 
+// Admin components
+import UserPermissions from "../Admin/UserPermissions";
+
 import ProtectedComponent from "../../components/ProtectedComponent";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -349,6 +352,10 @@ const Dashboard = ({ user, onLogout }) => {
             ) : activeItem === "supplier" ? (
               <ProtectedComponent module="supplier" action="view">
                 <Supplier />
+              </ProtectedComponent>
+            ) : activeItem === "userPermissions" ? (
+              <ProtectedComponent module="permissionManagement" action="view">
+                <UserPermissions />
               </ProtectedComponent>
             ) : (
               <div className="space-y-8">

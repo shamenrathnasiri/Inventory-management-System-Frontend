@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Home, FileText, ChevronDown, ChevronRight, Settings, LogOut, X, BoxSelect, BookXIcon, Torus } from "lucide-react";
+import { Home, FileText, ChevronDown, ChevronRight, Settings, LogOut, X, BoxSelect, BookXIcon, Torus, Shield, Users } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext"; // Adjust path
 
 const Sidebar = ({
@@ -11,6 +11,9 @@ const Sidebar = ({
   setIsOpen,
 }) => {
   const { hasPermission } = useAuth();
+  
+  // Check if user is admin for administration menu (case-insensitive)
+  const isAdmin = !!(user?.role && String(user.role).toLowerCase().includes("admin"));
 
   const menuItems = useMemo(
     () => [
@@ -51,9 +54,18 @@ const Sidebar = ({
       { id: "stockTransfer", name: "Stock Transfer" },
       { id: "stockVerification", name: "Stock Verification" },
         ]
-     }
+     },
+     // Only show Administration menu for admin users
+     ...(isAdmin ? [{
+        id: "administration",
+        name: "Administration",
+        icon: Shield,
+        subItems: [
+          { id: "userPermissions", name: "User Permissions" },
+        ]
+     }] : [])
     ],
-    []
+    [isAdmin]
   );
 
   // Inventory grouping removed; menu items are flat top-level entries
@@ -74,9 +86,22 @@ const Sidebar = ({
   }, [activeItem, menuItems]);
 
   // Recursive function to filter menu items based on permissions
+  // Maps menu item IDs to their corresponding permission module IDs
+  const getPermissionModule = (itemId) => {
+    const permissionMap = {
+      userPermissions: "permissionManagement",
+      // Add more mappings here if menu item IDs differ from permission module IDs
+    };
+    return permissionMap[itemId] || itemId;
+  };
+
   const filterMenuItems = (items, ancestors = []) => {
+    // If user is admin, show everything (administrators have full visibility)
+    if (isAdmin) return items;
+
     return items
       .map((item) => {
+        const permModule = getPermissionModule(item.id);
         if (item.subItems) {
           const filteredSubItems = filterMenuItems(item.subItems, [...ancestors, item.id]);
           // Show parent if:
@@ -85,15 +110,15 @@ const Sidebar = ({
           // - any ancestor higher up has permission (fallback for broader permissions)
           if (
             filteredSubItems.length > 0 ||
-            hasPermission(item.id, "view") ||
-            ancestors.some((a) => hasPermission(a, "view"))
+            hasPermission(permModule, "view") ||
+            ancestors.some((a) => hasPermission(getPermissionModule(a), "view"))
           ) {
             return { ...item, subItems: filteredSubItems };
           }
         } else if (
-          hasPermission(item.id, "view") ||
+          hasPermission(permModule, "view") ||
           // if user has permission for any ancestor (e.g., "inventory" or "masterFiles"), allow the child
-          ancestors.some((a) => hasPermission(a, "view"))
+          ancestors.some((a) => hasPermission(getPermissionModule(a), "view"))
         ) {
           return item;
         }

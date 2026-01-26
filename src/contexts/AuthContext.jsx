@@ -1,22 +1,46 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { loadUser } from "../services/AuthService";
-import { permissions } from "../config/permissions"; // Or fetch from API
+import { permissions as defaultPermissions } from "../config/permissions";
+import { getMyPermissions } from "../services/PermissionService";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userPermissions, setUserPermissions] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  // Fetch user-specific permissions from server
+  const fetchUserPermissions = async (userData) => {
+    try {
+      // Try to fetch custom permissions from server
+      const serverPermissions = await getMyPermissions();
+      if (serverPermissions && Object.keys(serverPermissions).length > 0) {
+        // Use server-provided permissions (customized by admin)
+        setUserPermissions(serverPermissions.data || serverPermissions);
+      } else {
+        // Fallback to role-based default permissions
+        setUserPermissions(defaultPermissions[userData.role] || {});
+      }
+    } catch (error) {
+      // If server call fails, use default role-based permissions
+      console.warn("Could not fetch custom permissions, using role defaults:", error);
+      setUserPermissions(defaultPermissions[userData.role] || {});
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        setLoading(true);
         const userData = await loadUser();
         setUser(userData);
-        setUserPermissions(permissions[userData.role] || {}); // Map role to permissions
+        await fetchUserPermissions(userData);
       } catch (error) {
         setUser(null);
         setUserPermissions({});
+      } finally {
+        setLoading(false);
       }
     };
     fetchUser();
@@ -25,17 +49,27 @@ export const AuthProvider = ({ children }) => {
   // Keep permissions in sync if user's role changes (e.g., after re-login)
   useEffect(() => {
     if (user && user.role) {
-      setUserPermissions(permissions[user.role] || {});
+      fetchUserPermissions(user);
     } else {
       setUserPermissions({});
     }
   }, [user?.role]);
 
   // Allow app code to push a new user into context after login/register
-  const setAuthUser = (newUser) => {
+  const setAuthUser = async (newUser) => {
     setUser(newUser);
-    const role = newUser?.role;
-    setUserPermissions(role ? permissions[role] || {} : {});
+    if (newUser) {
+      await fetchUserPermissions(newUser);
+    } else {
+      setUserPermissions({});
+    }
+  };
+
+  // Refresh permissions (call after admin updates permissions)
+  const refreshPermissions = async () => {
+    if (user) {
+      await fetchUserPermissions(user);
+    }
   };
 
   // Clear auth state on logout
@@ -44,13 +78,27 @@ export const AuthProvider = ({ children }) => {
     setUserPermissions({});
   };
 
+  const isAdminRole = (u) => {
+    return !!(u?.role && String(u.role).toLowerCase().includes("admin"));
+  };
+
   const hasPermission = (module, action) => {
+    // Administrators have implicit access to everything
+    if (isAdminRole(user)) return true;
     return userPermissions[module]?.[action] || false;
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, userPermissions, hasPermission, setAuthUser, clearAuth }}
+      value={{ 
+        user, 
+        userPermissions, 
+        hasPermission, 
+        setAuthUser, 
+        clearAuth,
+        refreshPermissions,
+        loading 
+      }}
     >
       {children}
     </AuthContext.Provider>
