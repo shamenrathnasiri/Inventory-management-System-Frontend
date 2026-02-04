@@ -61,8 +61,17 @@ const Sidebar = ({
         name: "Report",
         icon: PenBox,
         subItems: [
-      { id: "stockTransfer", name: "Stock Transfer" },
-      { id: "stockVerification", name: "Stock Verification" },
+          { id: "reportGrn", name: "GRN Report" },
+          { id: "reportInvoice", name: "Invoice Report" },
+          { id: "reportSalesOrder", name: "Sales Order Report" },
+          { id: "reportSalesReturn", name: "Sales Return Report" },
+          { id: "reportPurchaseOrder", name: "Purchase Order Report" },
+          { id: "reportPurchaseReturn", name: "Purchase Return Report" },
+          { id: "reportStockTransfer", name: "Stock Transfer Report" },
+          { id: "reportStockVerification", name: "Stock Verification Report" },
+          { id: "reportCustomer", name: "Customer Report" },
+          { id: "reportSupplier", name: "Supplier Report" },
+          { id: "reportProduct", name: "Product Report" },
         ]
      },
 
