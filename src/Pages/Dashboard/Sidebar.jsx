@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Home, FileText, ChevronDown, ChevronRight, Settings, LogOut, X, BoxSelect, BookXIcon, Torus, Shield, Users } from "lucide-react";
+import { Home, FileText, ChevronDown, ChevronRight, Settings, LogOut, X, BoxSelect, BookXIcon, Torus, Shield, Users, PenBox } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext"; // Adjust path
 
 const Sidebar = ({
@@ -55,6 +55,17 @@ const Sidebar = ({
       { id: "stockVerification", name: "Stock Verification" },
         ]
      },
+
+     {
+        id: "Report",
+        name: "Report",
+        icon: PenBox,
+        subItems: [
+      { id: "stockTransfer", name: "Stock Transfer" },
+      { id: "stockVerification", name: "Stock Verification" },
+        ]
+     },
+
      // Only show Administration menu for admin users
      ...(isAdmin ? [{
         id: "administration",
