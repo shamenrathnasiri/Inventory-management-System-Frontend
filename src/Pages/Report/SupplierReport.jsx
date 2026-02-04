@@ -1,0 +1,85 @@
+import React from "react";
+import ReportViewer from "../../components/Report/ReportViewer";
+import { getSupplierReport } from "../../services/Report/reportService";
+
+const SupplierReport = () => {
+  const columns = [
+    { key: "supplierCode", label: "Supplier Code", minWidth: "120px" },
+    { key: "supplierName", label: "Supplier Name", minWidth: "150px" },
+    { key: "contactPerson", label: "Contact Person", minWidth: "130px" },
+    { key: "phone", label: "Phone", minWidth: "120px" },
+    { key: "email", label: "Email", minWidth: "180px" },
+    { key: "address", label: "Address", minWidth: "200px" },
+    { key: "city", label: "City", minWidth: "100px" },
+    {
+      key: "totalOrders",
+      label: "Total Orders",
+      minWidth: "110px",
+    },
+    {
+      key: "totalPurchases",
+      label: "Total Purchases",
+      minWidth: "130px",
+      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+    },
+    {
+      key: "payableDue",
+      label: "Payable Due",
+      minWidth: "120px",
+      render: (value) => (
+        <span className={value > 0 ? "text-red-600 font-semibold" : "text-green-600"}>
+          {value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0"}
+        </span>
+      ),
+    },
+    {
+      key: "status",
+      label: "Status",
+      minWidth: "100px",
+      render: (value) => (
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+            value === "Active"
+              ? "bg-green-100 text-green-700"
+              : "bg-gray-100 text-gray-700"
+          }`}
+        >
+          {value || "Active"}
+        </span>
+      ),
+    },
+  ];
+
+  const filterOptions = [
+    {
+      key: "status",
+      label: "Status",
+      type: "select",
+      options: [
+        { value: "Active", label: "Active" },
+        { value: "Inactive", label: "Inactive" },
+      ],
+    },
+    {
+      key: "city",
+      label: "City",
+      type: "text",
+      placeholder: "Enter city name",
+    },
+  ];
+
+  return (
+    <ReportViewer
+      title="Supplier Report"
+      reportType="supplier"
+      columns={columns}
+      fetchData={getSupplierReport}
+      filterOptions={filterOptions}
+      showDateRange={false}
+      showSearch={true}
+      pageSize={10}
+    />
+  );
+};
+
+export default SupplierReport;

@@ -28,6 +28,21 @@ import Pending from "../Inventory/Pending";
 // Admin components
 import UserPermissions from "../Admin/UserPermissions";
 
+// Report components
+import {
+  GrnReport,
+  InvoiceReport,
+  SalesOrderReport,
+  SalesReturnReport,
+  PurchaseOrderReport,
+  PurchaseReturnReport,
+  StockTransferReport,
+  StockVerificationReport,
+  CustomerReport,
+  SupplierReport,
+  ProductReport,
+} from "../Report";
+
 import ProtectedComponent from "../../components/ProtectedComponent";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -356,6 +371,50 @@ const Dashboard = ({ user, onLogout }) => {
             ) : activeItem === "userPermissions" ? (
               <ProtectedComponent module="permissionManagement" action="view">
                 <UserPermissions />
+              </ProtectedComponent>
+            ) : activeItem === "reportGrn" ? (
+              <ProtectedComponent module="report" action="view">
+                <GrnReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportInvoice" ? (
+              <ProtectedComponent module="report" action="view">
+                <InvoiceReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportSalesOrder" ? (
+              <ProtectedComponent module="report" action="view">
+                <SalesOrderReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportSalesReturn" ? (
+              <ProtectedComponent module="report" action="view">
+                <SalesReturnReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportPurchaseOrder" ? (
+              <ProtectedComponent module="report" action="view">
+                <PurchaseOrderReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportPurchaseReturn" ? (
+              <ProtectedComponent module="report" action="view">
+                <PurchaseReturnReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportStockTransfer" ? (
+              <ProtectedComponent module="report" action="view">
+                <StockTransferReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportStockVerification" ? (
+              <ProtectedComponent module="report" action="view">
+                <StockVerificationReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportCustomer" ? (
+              <ProtectedComponent module="report" action="view">
+                <CustomerReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportSupplier" ? (
+              <ProtectedComponent module="report" action="view">
+                <SupplierReport />
+              </ProtectedComponent>
+            ) : activeItem === "reportProduct" ? (
+              <ProtectedComponent module="report" action="view">
+                <ProductReport />
               </ProtectedComponent>
             ) : (
               <div className="space-y-8">
