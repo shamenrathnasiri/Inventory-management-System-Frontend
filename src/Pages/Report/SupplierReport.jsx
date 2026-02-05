@@ -4,8 +4,16 @@ import { getSupplierReport } from "../../services/Report/reportService";
 
 const SupplierReport = () => {
   const columns = [
-    { key: "id", label: "ID", minWidth: "60px" },
-    { key: "supplier_name", label: "Supplier Name", minWidth: "150px" },
+    { key: "id", label: "ID", minWidth: "60px", primary: true },
+    { key: "supplier_name", label: "Supplier Name", minWidth: "150px", primary: true },
+    {
+      key: "credit_value",
+      label: "Credit Limit",
+      minWidth: "130px",
+      primary: true,
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
+    },
     { key: "phone_number", label: "Phone", minWidth: "130px" },
     { key: "nic", label: "NIC", minWidth: "140px" },
     { key: "email", label: "Email", minWidth: "180px" },
@@ -17,13 +25,6 @@ const SupplierReport = () => {
         const parts = [row?.address1, row?.address2].filter(Boolean);
         return parts.length > 0 ? parts.join(", ") : "-";
       },
-    },
-    {
-      key: "credit_value",
-      label: "Credit Limit",
-      minWidth: "130px",
-      render: (value) =>
-        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
     },
     {
       key: "credit_period",

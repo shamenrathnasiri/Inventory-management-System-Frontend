@@ -4,9 +4,16 @@ import { getInvoiceReport } from "../../services/Report/reportService";
 
 const InvoiceReport = () => {
   const columns = [
-    { key: "invoiceNo", label: "Invoice No", minWidth: "120px" },
+    { key: "invoiceNo", label: "Invoice No", minWidth: "120px", primary: true },
+    { key: "customerName", label: "Customer", minWidth: "150px", primary: true },
+    {
+      key: "totalAmount",
+      label: "Total Amount",
+      minWidth: "120px",
+      primary: true,
+      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+    },
     { key: "date", label: "Date", minWidth: "100px" },
-    { key: "customerName", label: "Customer", minWidth: "150px" },
     { key: "centerName", label: "Center", minWidth: "120px" },
     { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
@@ -19,12 +26,6 @@ const InvoiceReport = () => {
       key: "discount",
       label: "Discount",
       minWidth: "100px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    {
-      key: "totalAmount",
-      label: "Total Amount",
-      minWidth: "120px",
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
     {

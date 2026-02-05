@@ -14,14 +14,16 @@ import {
   X,
   ChevronDown,
   ChevronUp,
+  Plus,
+  Minus,
 } from "lucide-react";
 import { exportReportToPdf, exportReportToExcel } from "../../services/Report/reportService";
 
 // Mobile Card Component for responsive display
 const MobileCard = ({ row, columns, isExpanded, onToggle }) => {
-  // Show first 3 columns always, rest on expand
-  const primaryColumns = columns.slice(0, 3);
-  const secondaryColumns = columns.slice(3);
+  // Show primary columns always, rest on expand
+  const primaryColumns = columns.filter((col) => col.primary);
+  const secondaryColumns = columns.filter((col) => !col.primary);
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
@@ -76,6 +78,61 @@ const MobileCard = ({ row, columns, isExpanded, onToggle }) => {
         </>
       )}
     </div>
+  );
+};
+
+// Expandable Table Row Component
+const ExpandableTableRow = ({ row, columns, isExpanded, onToggle }) => {
+  const primaryColumns = columns.filter((col) => col.primary);
+  const secondaryColumns = columns.filter((col) => !col.primary);
+
+  return (
+    <>
+      {/* Main Row with Primary Columns */}
+      <tr className="hover:bg-gray-50 transition-colors border-b border-gray-100">
+        {/* Expand/Collapse Button */}
+        <td className="px-2 xl:px-3 py-3 xl:py-4">
+          <button
+            onClick={onToggle}
+            className="p-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+          >
+            {isExpanded ? (
+              <Minus className="h-4 w-4" />
+            ) : (
+              <Plus className="h-4 w-4" />
+            )}
+          </button>
+        </td>
+        {primaryColumns.map((col) => (
+          <td
+            key={col.key}
+            className="px-4 xl:px-6 py-3 xl:py-4 text-xs xl:text-sm text-gray-700 font-medium"
+          >
+            {col.render ? col.render(row[col.key], row) : row[col.key] ?? "-"}
+          </td>
+        ))}
+      </tr>
+
+      {/* Expanded Row with Secondary Columns */}
+      {isExpanded && (
+        <tr className="bg-gray-50/70">
+          <td colSpan={primaryColumns.length + 1} className="px-4 xl:px-6 py-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
+              {secondaryColumns.map((col) => (
+                <div key={col.key} className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                    {col.label}
+                  </span>
+                  <span className="text-sm text-gray-900">
+                    {col.render ? col.render(row[col.key], row) : row[col.key] ?? "-"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
   );
 };
 
@@ -493,34 +550,30 @@ const ReportViewer = ({
               <table className="w-full">
                 <thead className="bg-gradient-to-r from-red-500 to-red-600 text-white">
                   <tr>
-                    {columns.map((col) => (
-                      <th
-                        key={col.key}
-                        className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs xl:text-sm font-semibold uppercase tracking-wider whitespace-nowrap"
-                        style={{ minWidth: col.minWidth || "auto" }}
-                      >
-                        {col.label}
-                      </th>
-                    ))}
+                    <th className="px-2 xl:px-3 py-3 xl:py-4 w-12"></th>
+                    {columns
+                      .filter((col) => col.primary)
+                      .map((col) => (
+                        <th
+                          key={col.key}
+                          className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs xl:text-sm font-semibold uppercase tracking-wider whitespace-nowrap"
+                          style={{ minWidth: col.minWidth || "auto" }}
+                        >
+                          {col.label}
+                        </th>
+                      ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody>
                   {paginatedData.map((row, rowIndex) => (
-                    <tr
+                    <ExpandableTableRow
                       key={row.id || rowIndex}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      {columns.map((col) => (
-                        <td
-                          key={col.key}
-                          className="px-4 xl:px-6 py-3 xl:py-4 text-xs xl:text-sm text-gray-700"
-                        >
-                          {col.render
-                            ? col.render(row[col.key], row)
-                            : row[col.key] ?? "-"}
-                        </td>
-                      ))}
-                    </tr>
+                      row={row}
+                      columns={columns}
+                      rowIndex={rowIndex}
+                      isExpanded={expandedCards[row.id || rowIndex]}
+                      onToggle={() => toggleCardExpansion(row.id || rowIndex)}
+                    />
                   ))}
                 </tbody>
               </table>

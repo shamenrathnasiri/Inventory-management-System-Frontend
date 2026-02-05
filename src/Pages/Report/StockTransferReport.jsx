@@ -4,17 +4,18 @@ import { getStockTransferReport } from "../../services/Report/reportService";
 
 const StockTransferReport = () => {
   const columns = [
-    { key: "transferNo", label: "Transfer No", minWidth: "120px" },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "fromCenter", label: "From Center", minWidth: "130px" },
-    { key: "toCenter", label: "To Center", minWidth: "130px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
+    { key: "transferNo", label: "Transfer No", minWidth: "120px", primary: true },
+    { key: "fromCenter", label: "From Center", minWidth: "130px", primary: true },
     {
       key: "totalValue",
       label: "Total Value",
       minWidth: "120px",
+      primary: true,
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
+    { key: "date", label: "Date", minWidth: "100px" },
+    { key: "toCenter", label: "To Center", minWidth: "130px" },
+    { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
       key: "status",
       label: "Status",

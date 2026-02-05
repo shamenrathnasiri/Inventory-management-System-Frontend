@@ -4,8 +4,16 @@ import { getProductReport } from "../../services/Report/reportService";
 
 const ProductReport = () => {
   const columns = [
-    { key: "code", label: "Product Code", minWidth: "140px" },
-    { key: "name", label: "Product Name", minWidth: "180px" },
+    { key: "code", label: "Product Code", minWidth: "140px", primary: true },
+    { key: "name", label: "Product Name", minWidth: "180px", primary: true },
+    {
+      key: "mrp",
+      label: "MRP",
+      minWidth: "120px",
+      primary: true,
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
+    },
     { key: "barcode", label: "Barcode", minWidth: "140px" },
     {
       key: "productType",
@@ -22,13 +30,6 @@ const ProductReport = () => {
     {
       key: "cost",
       label: "Cost Price",
-      minWidth: "120px",
-      render: (value) =>
-        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
-    },
-    {
-      key: "mrp",
-      label: "MRP",
       minWidth: "120px",
       render: (value) =>
         value ? `Rs. ${Number(value).toLocaleString()}` : "-",

@@ -4,56 +4,74 @@ import { getPurchaseOrderReport } from "../../services/Report/reportService";
 
 const PurchaseOrderReport = () => {
   const columns = [
-    { key: "orderNo", label: "PO No", minWidth: "120px" },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "supplierName", label: "Supplier", minWidth: "150px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
-      key: "totalAmount",
+      key: "created_at",
+      label: "Date",
+      minWidth: "110px",
+      primary: true,
+      render: (value) =>
+        value ? new Date(value).toLocaleDateString("en-GB") : "-",
+    },
+    { key: "voucherNumber", label: "PO No", minWidth: "130px", primary: true },
+    {
+      key: "supplier",
+      label: "Supplier",
+      minWidth: "150px",
+      primary: true,
+      render: (_value, row) => row?.supplier?.supplier_name || "-",
+    },
+    {
+      key: "amount",
       label: "Total Amount",
       minWidth: "120px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+      primary: true,
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
     },
     {
-      key: "status",
-      label: "Status",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Completed"
-              ? "bg-green-100 text-green-700"
-              : value === "Processing"
-              ? "bg-blue-100 text-blue-700"
-              : value === "Pending"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {value || "N/A"}
-        </span>
-      ),
+      key: "discountValue",
+      label: "Discount",
+      minWidth: "110px",
+      primary: true,
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0",
     },
     {
-      key: "receivedStatus",
-      label: "Received",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Full"
-              ? "bg-green-100 text-green-700"
-              : value === "Partial"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          {value || "Not Received"}
-        </span>
-      ),
+      key: "center",
+      label: "Center",
+      minWidth: "120px",
+      render: (_value, row) => row?.center?.name || "-",
     },
-    { key: "createdBy", label: "Created By", minWidth: "120px" },
+    { key: "referNumber", label: "Reference", minWidth: "110px" },
+     {
+      key: "products",
+      label: "Products",
+      minWidth: "200px",
+      render: (_value, row) => {
+        const names = (row?.items || [])
+          .map(
+            (item) =>
+              item?.product_name ||
+              item?.item_name ||
+              item?.product?.name ||
+              item?.item?.name
+          )
+          .filter(Boolean);
+        return names.length > 0 ? names.join(", ") : "-";
+      },
+    },
+
+    {
+      key: "items",
+      label: "Items",
+      minWidth: "80px",
+      render: (_value, row) => row?.items?.length || 0,
+    },
+    
+   
+   
+   
+    
   ];
 
   const filterOptions = [
@@ -62,27 +80,26 @@ const PurchaseOrderReport = () => {
       label: "Status",
       type: "select",
       options: [
-        { value: "Completed", label: "Completed" },
-        { value: "Processing", label: "Processing" },
-        { value: "Pending", label: "Pending" },
-        { value: "Cancelled", label: "Cancelled" },
+        { value: "completed", label: "Completed" },
+        { value: "processing", label: "Processing" },
+        { value: "pending", label: "Pending" },
+        { value: "cancelled", label: "Cancelled" },
       ],
     },
     {
-      key: "receivedStatus",
-      label: "Received Status",
+      key: "is_confirmed",
+      label: "Confirmed",
       type: "select",
       options: [
-        { value: "Full", label: "Full" },
-        { value: "Partial", label: "Partial" },
-        { value: "Not Received", label: "Not Received" },
+        { value: "1", label: "Yes" },
+        { value: "0", label: "No" },
       ],
     },
     {
-      key: "center",
-      label: "Center",
-      type: "select",
-      options: [],
+      key: "supplier",
+      label: "Supplier",
+      type: "text",
+      placeholder: "Search supplier",
     },
   ];
 

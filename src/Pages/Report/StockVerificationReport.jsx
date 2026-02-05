@@ -4,18 +4,19 @@ import { getStockVerificationReport } from "../../services/Report/reportService"
 
 const StockVerificationReport = () => {
   const columns = [
-    { key: "verificationNo", label: "Verification No", minWidth: "130px" },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
-    { key: "matchedItems", label: "Matched", minWidth: "100px" },
-    { key: "discrepancies", label: "Discrepancies", minWidth: "110px" },
+    { key: "verificationNo", label: "Verification No", minWidth: "130px", primary: true },
+    { key: "centerName", label: "Center", minWidth: "120px", primary: true },
     {
       key: "discrepancyValue",
       label: "Discrepancy Value",
       minWidth: "140px",
+      primary: true,
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
+    { key: "date", label: "Date", minWidth: "100px" },
+    { key: "totalItems", label: "Total Items", minWidth: "100px" },
+    { key: "matchedItems", label: "Matched", minWidth: "100px" },
+    { key: "discrepancies", label: "Discrepancies", minWidth: "110px" },
     {
       key: "status",
       label: "Status",

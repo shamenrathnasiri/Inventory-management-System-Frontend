@@ -4,18 +4,19 @@ import { getSalesReturnReport } from "../../services/Report/reportService";
 
 const SalesReturnReport = () => {
   const columns = [
-    { key: "returnNo", label: "Return No", minWidth: "120px" },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "invoiceNo", label: "Invoice No", minWidth: "120px" },
-    { key: "customerName", label: "Customer", minWidth: "150px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
+    { key: "returnNo", label: "Return No", minWidth: "120px", primary: true },
+    { key: "customerName", label: "Customer", minWidth: "150px", primary: true },
     {
       key: "totalAmount",
       label: "Total Amount",
       minWidth: "120px",
+      primary: true,
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
+    { key: "date", label: "Date", minWidth: "100px" },
+    { key: "invoiceNo", label: "Invoice No", minWidth: "120px" },
+    { key: "centerName", label: "Center", minWidth: "120px" },
+    { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
       key: "reason",
       label: "Reason",

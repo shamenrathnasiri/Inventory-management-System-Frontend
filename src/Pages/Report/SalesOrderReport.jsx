@@ -4,17 +4,18 @@ import { getSalesOrderReport } from "../../services/Report/reportService";
 
 const SalesOrderReport = () => {
   const columns = [
-    { key: "orderNo", label: "Order No", minWidth: "120px" },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "customerName", label: "Customer", minWidth: "150px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
+    { key: "orderNo", label: "Order No", minWidth: "120px", primary: true },
+    { key: "customerName", label: "Customer", minWidth: "150px", primary: true },
     {
       key: "totalAmount",
       label: "Total Amount",
       minWidth: "120px",
+      primary: true,
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
+    { key: "date", label: "Date", minWidth: "100px" },
+    { key: "centerName", label: "Center", minWidth: "120px" },
+    { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
       key: "status",
       label: "Status",

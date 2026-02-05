@@ -4,8 +4,15 @@ import { getCustomerReport } from "../../services/Report/reportService";
 
 const CustomerReport = () => {
   const columns = [
-    { key: "customerCode", label: "Customer Code", minWidth: "120px" },
-    { key: "customerName", label: "Customer Name", minWidth: "150px" },
+    { key: "customerCode", label: "Customer Code", minWidth: "120px", primary: true },
+    { key: "customerName", label: "Customer Name", minWidth: "150px", primary: true },
+    {
+      key: "totalPurchases",
+      label: "Total Purchases",
+      minWidth: "130px",
+      primary: true,
+      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+    },
     { key: "contactPerson", label: "Contact Person", minWidth: "130px" },
     { key: "phone", label: "Phone", minWidth: "120px" },
     { key: "email", label: "Email", minWidth: "180px" },
@@ -15,12 +22,6 @@ const CustomerReport = () => {
       key: "totalOrders",
       label: "Total Orders",
       minWidth: "110px",
-    },
-    {
-      key: "totalPurchases",
-      label: "Total Purchases",
-      minWidth: "130px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
     {
       key: "outstandingBalance",
