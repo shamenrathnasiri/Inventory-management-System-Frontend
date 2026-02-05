@@ -4,49 +4,53 @@ import { getSupplierReport } from "../../services/Report/reportService";
 
 const SupplierReport = () => {
   const columns = [
-    { key: "supplierCode", label: "Supplier Code", minWidth: "120px" },
-    { key: "supplierName", label: "Supplier Name", minWidth: "150px" },
-    { key: "contactPerson", label: "Contact Person", minWidth: "130px" },
-    { key: "phone", label: "Phone", minWidth: "120px" },
+    { key: "id", label: "ID", minWidth: "60px" },
+    { key: "supplier_name", label: "Supplier Name", minWidth: "150px" },
+    { key: "phone_number", label: "Phone", minWidth: "130px" },
+    { key: "nic", label: "NIC", minWidth: "140px" },
     { key: "email", label: "Email", minWidth: "180px" },
-    { key: "address", label: "Address", minWidth: "200px" },
-    { key: "city", label: "City", minWidth: "100px" },
     {
-      key: "totalOrders",
-      label: "Total Orders",
-      minWidth: "110px",
+      key: "address",
+      label: "Address",
+      minWidth: "220px",
+      render: (_value, row) => {
+        const parts = [row?.address1, row?.address2].filter(Boolean);
+        return parts.length > 0 ? parts.join(", ") : "-";
+      },
     },
     {
-      key: "totalPurchases",
-      label: "Total Purchases",
+      key: "credit_value",
+      label: "Credit Limit",
       minWidth: "130px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
     },
     {
-      key: "payableDue",
-      label: "Payable Due",
+      key: "credit_period",
+      label: "Credit Period",
       minWidth: "120px",
-      render: (value) => (
-        <span className={value > 0 ? "text-red-600 font-semibold" : "text-green-600"}>
-          {value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0"}
-        </span>
-      ),
+      render: (value) => (value ? `${value} days` : "-"),
     },
+    
+    
     {
-      key: "status",
+      key: "deleted_at",
       label: "Status",
       minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Active"
-              ? "bg-green-100 text-green-700"
-              : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          {value || "Active"}
-        </span>
-      ),
+      render: (value) => {
+        const isActive = !value;
+        return (
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+              isActive
+                ? "bg-green-100 text-green-700"
+                : "bg-gray-100 text-gray-700"
+            }`}
+          >
+            {isActive ? "Active" : "Inactive"}
+          </span>
+        );
+      },
     },
   ];
 
@@ -56,15 +60,15 @@ const SupplierReport = () => {
       label: "Status",
       type: "select",
       options: [
-        { value: "Active", label: "Active" },
-        { value: "Inactive", label: "Inactive" },
+        { value: "active", label: "Active" },
+        { value: "inactive", label: "Inactive" },
       ],
     },
     {
-      key: "city",
-      label: "City",
+      key: "address",
+      label: "Address/City",
       type: "text",
-      placeholder: "Enter city name",
+      placeholder: "Search by address or city",
     },
   ];
 

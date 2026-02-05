@@ -4,81 +4,103 @@ import { getProductReport } from "../../services/Report/reportService";
 
 const ProductReport = () => {
   const columns = [
-    { key: "productCode", label: "Product Code", minWidth: "120px" },
-    { key: "productName", label: "Product Name", minWidth: "180px" },
-    { key: "productType", label: "Type", minWidth: "100px" },
-    { key: "category", label: "Category", minWidth: "120px" },
-    { key: "unit", label: "Unit", minWidth: "80px" },
+    { key: "code", label: "Product Code", minWidth: "140px" },
+    { key: "name", label: "Product Name", minWidth: "180px" },
+    { key: "barcode", label: "Barcode", minWidth: "140px" },
     {
-      key: "costPrice",
-      label: "Cost Price",
-      minWidth: "110px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    {
-      key: "sellingPrice",
-      label: "Selling Price",
+      key: "productType",
+      label: "Type",
       minWidth: "120px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+      render: (_value, row) => row?.product_type?.type || "-",
     },
     {
-      key: "currentStock",
+      key: "discountLevel",
+      label: "Discount Level",
+      minWidth: "150px",
+      render: (_value, row) => row?.discount_level?.name || "-",
+    },
+    {
+      key: "cost",
+      label: "Cost Price",
+      minWidth: "120px",
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
+    },
+    {
+      key: "mrp",
+      label: "MRP",
+      minWidth: "120px",
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
+    },
+    {
+      key: "quantity",
       label: "Stock",
       minWidth: "100px",
-      render: (value, row) => (
-        <span
-          className={`font-semibold ${
-            value <= (row.reorderLevel || 10)
-              ? "text-red-600"
-              : value <= (row.reorderLevel || 10) * 2
-              ? "text-yellow-600"
-              : "text-green-600"
-          }`}
-        >
-          {value || 0}
-        </span>
-      ),
+      render: (value) => {
+        const stock = Number(value || 0);
+        return (
+          <span
+            className={`font-semibold ${
+              stock <= 0
+                ? "text-red-600"
+                : stock <= 5
+                  ? "text-yellow-600"
+                  : "text-green-600"
+            }`}
+          >
+            {stock}
+          </span>
+        );
+      },
     },
+    // {
+    //   key: "stockValue",
+    //   label: "Stock Value",
+    //   minWidth: "140px",
+    //   render: (_value, row) => {
+    //     const stock = Number(row?.quantity || 0);
+    //     const cost = Number(row?.cost || 0);
+    //     const value = stock * cost;
+    //     return value ? `Rs. ${Number(value).toLocaleString()}` : "-";
+    //   },
+    // },
     {
-      key: "stockValue",
-      label: "Stock Value",
-      minWidth: "120px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    { key: "reorderLevel", label: "Reorder Level", minWidth: "120px" },
-    {
-      key: "status",
+      key: "is_active",
       label: "Status",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Active"
-              ? "bg-green-100 text-green-700"
-              : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          {value || "Active"}
-        </span>
-      ),
+      minWidth: "110px",
+      render: (value) => {
+        const label = value ? "Active" : "Inactive";
+        return (
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+              value
+                ? "bg-green-100 text-green-700"
+                : "bg-gray-100 text-gray-700"
+            }`}
+          >
+            {label}
+          </span>
+        );
+      },
     },
   ];
 
   const filterOptions = [
     {
-      key: "status",
+      key: "is_active",
       label: "Status",
       type: "select",
       options: [
-        { value: "Active", label: "Active" },
-        { value: "Inactive", label: "Inactive" },
+        { value: "1", label: "Active" },
+        { value: "0", label: "Inactive" },
       ],
     },
     {
       key: "productType",
       label: "Product Type",
-      type: "select",
-      options: [],
+      type: "text",
+      placeholder: "e.g. boxex",
     },
     {
       key: "lowStock",

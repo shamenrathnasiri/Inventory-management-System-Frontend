@@ -148,7 +148,8 @@ export const exportReportToPdf = async (reportType, params = {}) => {
   try {
     const response = await axios.get(`/reports/${reportType}/export/pdf`, {
       params,
-      responseType: 'blob'
+      responseType: 'blob',
+      headers: { Accept: 'application/pdf' }
     });
     return response.data;
   } catch (error) {
@@ -162,7 +163,10 @@ export const exportReportToExcel = async (reportType, params = {}) => {
   try {
     const response = await axios.get(`/reports/${reportType}/export/excel`, {
       params,
-      responseType: 'blob'
+      responseType: 'blob',
+      headers: {
+        Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }
     });
     return response.data;
   } catch (error) {
