@@ -399,6 +399,13 @@ const SalesReturn = () => {
 
     // Static data from services
     const products = useMemo(() => getProducts() || [], []); // Available products
+    const hasBatchColumn = useMemo(
+      () =>
+        items.some((it) =>
+          String(it.batchNumber || "").trim()
+        ),
+      [items]
+    );
 
     // Filter products based on search input for typeahead
     const filteredProducts = useMemo(() => {
@@ -445,12 +452,27 @@ const SalesReturn = () => {
 
     const computeLineDiscountAmount = useCallback(
       (it) => {
-        const qty = Number(it.quantity) || 0;
-        const unit = Number(it.unitPrice) || 0;
+        const qty = Math.max(0, parseAbsoluteValue(it.quantity));
+        const unit = Math.max(0, parseAbsoluteValue(it.unitPrice));
+
+        if (it.discountEditable === false) {
+          const absoluteLineDiscount = Math.max(
+            0,
+            parseAbsoluteValue(
+              it.discountInput ??
+                it.discount ??
+                it.lineDiscountAmount ??
+                it.lineDiscount ??
+                0
+            )
+          );
+          return absoluteLineDiscount;
+        }
+
         const unitDiscount = parseDiscount(it.discountInput, unit);
         return (Number.isFinite(unitDiscount) ? unitDiscount : 0) * qty;
       },
-      [parseDiscount]
+      [parseAbsoluteValue, parseDiscount]
     );
 
     // Calculate totals from items
@@ -458,15 +480,15 @@ const SalesReturn = () => {
       let gross = 0;
       let disc = 0;
       for (const it of items) {
-        const qty = Number(it.quantity) || 0;
-        const price = Number(it.unitPrice) || 0;
+        const qty = Math.max(0, parseAbsoluteValue(it.quantity));
+        const price = Math.max(0, parseAbsoluteValue(it.unitPrice));
         const lineGross = qty * price;
         const dAmt = computeLineDiscountAmount(it);
         gross += Math.max(0, lineGross);
         disc += Math.max(0, dAmt);
       }
       return { grossTotal: gross, lineDiscountTotal: disc };
-    }, [items, computeLineDiscountAmount]);
+    }, [items, computeLineDiscountAmount, parseAbsoluteValue]);
 
     const effectiveDiscountTotal =
       linkedInvoiceDiscountTotal > 0
@@ -621,7 +643,6 @@ const SalesReturn = () => {
         prev.map((it) => {
           if (it.id !== id) return it;
           if (field === "discountInput") {
-            if (it.discountEditable === false) return it;
             return { ...it, discountInput: String(rawValue || ""), discount: undefined };
           }
           if (field === "batchNumber") {
@@ -658,7 +679,12 @@ const SalesReturn = () => {
       const baseId = Date.now();
       const mapped = sourceItems
         .map((item, idx) => {
-          const qty = Math.max(1, Number(item.quantity ?? item.qty ?? 0));
+          const qty = Math.max(
+            1,
+            parseAbsoluteValue(
+              item.quantity ?? item.qty ?? item.qtyOrdered ?? item.qty_ordered ?? 0
+            )
+          );
           if (!qty) return null;
 
           // Product name: prefer explicit 'Product Name' column, then common variants
@@ -679,7 +705,7 @@ const SalesReturn = () => {
      
           const unitPrice = Math.max(
             0,
-            Number(
+            parseAbsoluteValue(
               item.unitPrice ??
                 item.unit_price ??
                 item["Unit Price"] ??
@@ -1541,9 +1567,7 @@ const SalesReturn = () => {
                             <th className="px-4 sm:px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
                               Product Name
                             </th>
-                            {items.some((it) =>
-                              String(it.batchNumber || "").trim()
-                            ) && (
+                            {hasBatchColumn && (
                               <th className="px-4 sm:px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
                                 Batch Number
                               </th>
@@ -1570,11 +1594,7 @@ const SalesReturn = () => {
                         </thead>
                         <tbody className="bg-white divide-y divide-slate-100">
                           {items.map((it, idx) => {
-                            const rowQty = Number(it.quantity) || 0;
-                            const rowPrice = Number(it.unitPrice) || 0;
-                            const rowGross = rowQty * rowPrice;
-                            const rowDiscount = computeLineDiscountAmount(it);
-                            const rowTotal = Math.max(0, rowGross - rowDiscount);
+                            // When invoice-level discount is used, show gross as row total (discount applied at summary)
                             return (
                               <tr
                                 key={it.id}
@@ -1586,11 +1606,11 @@ const SalesReturn = () => {
                                 <td className="px-4 sm:px-6 py-4 text-sm text-slate-900 font-semibold">
                                   {it.productName}
                                 </td>
-                                {String(it.batchNumber || "").trim() ? (
+                                {hasBatchColumn && (
                                   <td className="px-4 sm:px-6 py-4 text-sm text-slate-900 font-medium">
                                     {String(it.batchNumber || "")}
                                   </td>
-                                ) : null}
+                                )}
                                 <td className="px-4 sm:px-6 py-4 text-right whitespace-nowrap">
                                   <input
                                     type="number"
@@ -1622,23 +1642,21 @@ const SalesReturn = () => {
                                 </td>
                                   <td className="px-4 sm:px-6 py-4 text-right whitespace-nowrap">
                                     <input
-                                    type="text"
-                                    value={it.discountInput || ""}
-                                    onChange={(e) =>
-                                      updateItem(
-                                        it.id,
-                                        "discountInput",
-                                        e.target.value
-                                      )
-                                    }
-                                    placeholder="0 or 5%"
-                                      readOnly={it.discountEditable === false}
-                                      disabled={it.discountEditable === false}
-                                    className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white"
-                                  />
-                                </td>
+                                      type="text"
+                                      value={it.discountInput || ""}
+                                      onChange={(e) =>
+                                        updateItem(
+                                          it.id,
+                                          "discountInput",
+                                          e.target.value
+                                        )
+                                      }
+                                      placeholder="0 or 5%"
+                                      className="w-24 px-3 py-2 border-2 border-slate-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors bg-white"
+                                    />
+                                  </td>
                                 <td className="px-4 sm:px-6 py-4 text-sm font-bold text-slate-900 text-right whitespace-nowrap">
-                                  {formatLKR(rowTotal)}
+                                  {formatLKR(totalAmount)}
                                 </td>
                                 <td className="px-4 sm:px-6 py-4 text-center whitespace-nowrap">
                                   <button
@@ -1652,9 +1670,8 @@ const SalesReturn = () => {
                               </tr>
                             );
                           })}
-
-                          {/* Summary rows intentionally removed as requested */}
                         </tbody>
+                        
                       </table>
                     </div>
                   </div>
