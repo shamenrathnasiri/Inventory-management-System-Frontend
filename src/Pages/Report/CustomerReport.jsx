@@ -4,50 +4,24 @@ import { getCustomerReport } from "../../services/Report/reportService";
 
 const CustomerReport = () => {
   const columns = [
-    { key: "customerCode", label: "Customer Code", minWidth: "120px", primary: true },
-    { key: "customerName", label: "Customer Name", minWidth: "150px", primary: true },
+    { key: "id", label: "Customer ID", minWidth: "100px", primary: true, render: (_v, row) => row?.id ?? "-" },
+    { key: "name", label: "Customer Name", minWidth: "150px", primary: true, render: (_v, row) => row?.name || row?.customerName || "-" },
     {
-      key: "totalPurchases",
+      key: "total_purchase_amount",
       label: "Total Purchases",
       minWidth: "130px",
       primary: true,
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+      render: (_v, row) => (row?.total_purchase_amount ? `Rs. ${Number(row.total_purchase_amount).toLocaleString()}` : "Rs. 0"),
     },
-    { key: "contactPerson", label: "Contact Person", minWidth: "130px" },
-    { key: "phone", label: "Phone", minWidth: "120px" },
-    { key: "email", label: "Email", minWidth: "180px" },
-    { key: "address", label: "Address", minWidth: "200px" },
-    { key: "city", label: "City", minWidth: "100px" },
+    { key: "phone", label: "Phone", minWidth: "120px", render: (_v, row) => row?.phone || "-" },
+    { key: "email", label: "Email", minWidth: "180px", render: (_v, row) => row?.email || "-" },
+    { key: "address", label: "Address", minWidth: "200px", render: (_v, row) => row?.address || "-" },
+    { key: "city", label: "City", minWidth: "100px", render: (_v, row) => row?.city || "-" },
     {
-      key: "totalOrders",
+      key: "total_orders",
       label: "Total Orders",
       minWidth: "110px",
-    },
-    {
-      key: "outstandingBalance",
-      label: "Outstanding",
-      minWidth: "120px",
-      render: (value) => (
-        <span className={value > 0 ? "text-red-600 font-semibold" : "text-green-600"}>
-          {value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0"}
-        </span>
-      ),
-    },
-    {
-      key: "status",
-      label: "Status",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Active"
-              ? "bg-green-100 text-green-700"
-              : "bg-gray-100 text-gray-700"
-          }`}
-        >
-          {value || "Active"}
-        </span>
-      ),
+      render: (_v, row) => row?.total_sales_orders ?? row?.total_invoices ?? 0,
     },
   ];
 

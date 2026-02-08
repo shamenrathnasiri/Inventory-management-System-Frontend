@@ -42,25 +42,46 @@ const PurchaseOrderReport = () => {
       minWidth: "120px",
       render: (_value, row) => row?.center?.name || "-",
     },
+
     { key: "referNumber", label: "Reference", minWidth: "110px" },
-     {
+     
+    {
       key: "products",
       label: "Products",
       minWidth: "200px",
       render: (_value, row) => {
-        const names = (row?.items || [])
-          .map(
-            (item) =>
-              item?.product_name ||
-              item?.item_name ||
-              item?.product?.name ||
-              item?.item?.name
-          )
-          .filter(Boolean);
-        return names.length > 0 ? names.join(", ") : "-";
+        const parts = (row?.items || []).map((item) => {
+          const name = item?.product?.name || item?.item_name || item?.product_name || item?.item?.name || "Unnamed";
+          return `${name} `;
+        });
+        return parts.length > 0 ? parts.join(", ") : "-";
       },
     },
 
+    {
+      key: "costprice",
+      label: "Cost Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const costprice = (row?.items || []).reduce((sum, item) => {
+          const itemCost = Number(item?.cost ?? item?.amount ?? 0);
+          return  itemCost ;
+        }, 0);
+        return costprice ? `Rs. ${Number(costprice).toLocaleString()}` : "-";
+      }
+    },
+    {
+      key: "mrpprice",
+      label: "MRP Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const mrpprice = (row?.items || []).reduce((sum, item) => {
+          const itemMrp = Number(item?.mrp ?? 0);
+          return  itemMrp ;
+        }, 0);
+        return mrpprice ? `Rs. ${Number(mrpprice).toLocaleString()}` : "-";
+      }
+    },
     {
       key: "items",
       label: "Items",

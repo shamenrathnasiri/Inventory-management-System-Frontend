@@ -4,43 +4,89 @@ import { getPurchaseReturnReport } from "../../services/Report/reportService";
 
 const PurchaseReturnReport = () => {
   const columns = [
-    { key: "returnNo", label: "Return No", minWidth: "120px", primary: true },
-    { key: "supplierName", label: "Supplier", minWidth: "150px", primary: true },
     {
-      key: "totalAmount",
+      key: "created_at",
+      label: "Date",
+      minWidth: "110px",
+      primary: true,
+      render: (value) =>
+        value ? new Date(value).toLocaleDateString("en-GB") : "-",
+    },
+    { key: "voucherNumber", label: "Return No", minWidth: "130px", primary: true },
+    {
+      key: "supplier",
+      label: "Supplier",
+      minWidth: "150px",
+      primary: true,
+      render: (_value, row) => row?.supplier?.supplier_name || "-",
+    },
+    {
+      key: "amount",
       label: "Total Amount",
       minWidth: "120px",
       primary: true,
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "grnNo", label: "GRN No", minWidth: "120px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
-    {
-      key: "reason",
-      label: "Reason",
-      minWidth: "150px",
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
     },
     {
-      key: "status",
-      label: "Status",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Approved"
-              ? "bg-green-100 text-green-700"
-              : value === "Pending"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {value || "N/A"}
-        </span>
-      ),
+      key: "discountValue",
+      label: "Discount",
+      minWidth: "110px",
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0",
     },
-    { key: "createdBy", label: "Created By", minWidth: "120px" },
+    {
+      key: "center",
+      label: "Center",
+      minWidth: "120px",
+      render: (_value, row) => row?.center?.name || "-",
+    },
+    { key: "referNumber", label: "Reference", minWidth: "110px" },
+    {
+      key: "products",
+      label: "Products",
+      minWidth: "200px",
+      render: (_value, row) => {
+        const parts = (row?.items || []).map((item) => {
+          const name = item?.product?.name || item?.item_name || item?.product_name || "Unnamed";
+          return `${name} `;
+        });
+        return parts.length > 0 ? parts.join(", ") : "-";
+      },
+    },
+    {
+      key: "costprice",
+      label: "Cost Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const costprice = (row?.items || []).reduce((sum, item) => {
+          const itemCost = Number(item?.cost ?? item?.amount ?? 0);
+          return  itemCost ;
+        }, 0);
+        return costprice ? `Rs. ${Number(costprice).toLocaleString()}` : "-";
+      },
+    },
+    {
+      key: "mrpprice",
+      label: "MRP Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const mrpprice = (row?.items || []).reduce((sum, item) => {
+          const itemMrp = Number(item?.mrp ?? 0);
+          return  itemMrp ;
+        }, 0);
+        return mrpprice ? `Rs. ${Number(mrpprice).toLocaleString()}` : "-";
+      },
+    },
+    {
+      key: "items",
+      label: "Items",
+      minWidth: "80px",
+      render: (_value, row) => {
+        const totalQty = (row?.items || []).reduce((sum, it) => sum + (it?.quantity ?? 0), 0);
+        return totalQty || 0;
+      },
+    },
   ];
 
   const filterOptions = [
@@ -49,16 +95,26 @@ const PurchaseReturnReport = () => {
       label: "Status",
       type: "select",
       options: [
-        { value: "Approved", label: "Approved" },
-        { value: "Pending", label: "Pending" },
-        { value: "Rejected", label: "Rejected" },
+        { value: "completed", label: "Completed" },
+        { value: "processing", label: "Processing" },
+        { value: "pending", label: "Pending" },
+        { value: "cancelled", label: "Cancelled" },
       ],
     },
     {
-      key: "center",
-      label: "Center",
+      key: "is_confirmed",
+      label: "Confirmed",
       type: "select",
-      options: [],
+      options: [
+        { value: "1", label: "Yes" },
+        { value: "0", label: "No" },
+      ],
+    },
+    {
+      key: "supplier",
+      label: "Supplier",
+      type: "text",
+      placeholder: "Search supplier",
     },
   ];
 

@@ -4,67 +4,118 @@ import { getInvoiceReport } from "../../services/Report/reportService";
 
 const InvoiceReport = () => {
   const columns = [
-    { key: "invoiceNo", label: "Invoice No", minWidth: "120px", primary: true },
-    { key: "customerName", label: "Customer", minWidth: "150px", primary: true },
     {
-      key: "totalAmount",
+      key: "created_at",
+      label: "Date",
+      minWidth: "110px",
+      primary: true,
+      render: (value) =>
+        value ? new Date(value).toLocaleDateString("en-GB") : "-",
+    },
+    { key: "voucherNumber", label: "Invoice No", minWidth: "130px", primary: true },
+    {
+      key: "customer",
+      label: "Customer",
+      minWidth: "150px",
+      primary: true,
+      render: (_value, row) => row?.customer?.customer_name || "-",
+    },
+    {
+      key: "amount",
       label: "Total Amount",
       minWidth: "120px",
       primary: true,
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
-    {
-      key: "subtotal",
-      label: "Subtotal",
-      minWidth: "120px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "-",
     },
     {
-      key: "discount",
+      key: "discountValue",
       label: "Discount",
-      minWidth: "100px",
-      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
-    },
-    {
-      key: "paymentStatus",
-      label: "Payment Status",
-      minWidth: "120px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Paid"
-              ? "bg-green-100 text-green-700"
-              : value === "Partial"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {value || "Unpaid"}
-        </span>
-      ),
-    },
-    { key: "createdBy", label: "Created By", minWidth: "120px" },
-  ];
-
-  const filterOptions = [
-    {
-      key: "paymentStatus",
-      label: "Payment Status",
-      type: "select",
-      options: [
-        { value: "Paid", label: "Paid" },
-        { value: "Partial", label: "Partial" },
-        { value: "Unpaid", label: "Unpaid" },
-      ],
+      minWidth: "110px",
+      render: (value) =>
+        value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0",
     },
     {
       key: "center",
       label: "Center",
+      minWidth: "120px",
+      render: (_value, row) => row?.center?.name || "-",
+    },
+    { key: "referNumber", label: "Reference", minWidth: "110px" },
+    {
+      key: "products",
+      label: "Products",
+      minWidth: "200px",
+      render: (_value, row) => {
+        const parts = (row?.items || []).map((item) => {
+          const name = item?.product?.name || item?.item_name || item?.product_name || "Unnamed";
+          return `${name} `;
+        });
+        return parts.length > 0 ? parts.join(", ") : "-";
+      },
+    },
+    {
+      key: "costprice",
+      label: "Cost Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const costprice = (row?.items || []).reduce((sum, item) => {
+          const itemCost = Number(item?.cost ?? item?.amount ?? 0);
+
+          return  itemCost ;
+        }, 0);
+        return costprice ? `Rs. ${Number(costprice).toLocaleString()}` : "-";
+      },
+    },
+    {
+      key: "mrpprice",
+      label: "MRP Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const mrpprice = (row?.items || []).reduce((sum, item) => {
+          const itemMrp = Number(item?.mrp ?? 0);
+          return  itemMrp;
+        }, 0);
+        return mrpprice ? `Rs. ${Number(mrpprice).toLocaleString()}` : "-";
+      },
+    },
+    {
+      key: "items",
+      label: "Items",
+      minWidth: "80px",
+      render: (_value, row) => {
+        const totalQty = (row?.items || []).reduce((sum, it) => sum + (it?.quantity ?? 0), 0);
+        return totalQty || 0;
+      },
+    },
+  ];
+
+  const filterOptions = [
+    {
+      key: "status",
+      label: "Status",
       type: "select",
-      options: [], // Populate from API
+      options: [
+        { value: "completed", label: "Completed" },
+        { value: "processing", label: "Processing" },
+        { value: "pending", label: "Pending" },
+        { value: "cancelled", label: "Cancelled" },
+      ],
+    },
+    {
+      key: "is_confirmed",
+      label: "Confirmed",
+      type: "select",
+      options: [
+        { value: "1", label: "Yes" },
+        { value: "0", label: "No" },
+      ],
+    },
+    {
+      key: "customer",
+      label: "Customer",
+      type: "text",
+      placeholder: "Search customer",
     },
   ];
 

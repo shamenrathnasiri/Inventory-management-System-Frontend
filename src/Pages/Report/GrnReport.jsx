@@ -51,6 +51,31 @@ const GrnReport = () => {
       },
     },
     {
+      key: "costprice",
+      label: "Cost Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const costprice = (row?.items || []).reduce((sum, item) => {
+          const itemCost = Number(item?.cost ?? item?.amount ?? 0);
+          return itemCost;
+        }, 0);
+        return costprice ? `Rs. ${Number(costprice).toLocaleString()}` : "-";
+      },
+    },
+    {
+      key: "mrpprice",
+      label: "MRP Price",
+      minWidth: "120px",
+      render: (_value, row) => {
+        const mrpprice = (row?.items || []).reduce((sum, item) => {
+          const itemMrp = Number(item?.mrp ?? 0);
+          return itemMrp;
+        }, 0);
+        return mrpprice ? `Rs. ${Number(mrpprice).toLocaleString()}` : "-";
+      },
+    },
+    
+    {
       key: "items",
       label: "Items",
       minWidth: "80px",
