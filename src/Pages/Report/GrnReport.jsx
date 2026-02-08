@@ -4,37 +4,62 @@ import { getGrnReport } from "../../services/Report/reportService";
 
 const GrnReport = () => {
   const columns = [
-    { key: "grnNo", label: "GRN No", minWidth: "120px", primary: true },
-    { key: "supplierName", label: "Supplier", minWidth: "150px", primary: true },
     {
-      key: "totalAmount",
+      key: "created_at",
+      label: "Date",
+      minWidth: "110px",
+      primary: true,
+      render: (value) => (value ? new Date(value).toLocaleDateString("en-GB") : "-"),
+    },
+    { key: "voucherNumber", label: "GRN No", minWidth: "130px", primary: true },
+    {
+      key: "supplier",
+      label: "Supplier",
+      minWidth: "150px",
+      primary: true,
+      render: (_value, row) => row?.supplier?.supplier_name || "-",
+    },
+    {
+      key: "amount",
       label: "Total Amount",
       minWidth: "120px",
       primary: true,
       render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "-"),
     },
-    { key: "date", label: "Date", minWidth: "100px" },
-    { key: "centerName", label: "Center", minWidth: "120px" },
-    { key: "totalItems", label: "Total Items", minWidth: "100px" },
     {
-      key: "status",
-      label: "Status",
-      minWidth: "100px",
-      render: (value) => (
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            value === "Approved"
-              ? "bg-green-100 text-green-700"
-              : value === "Pending"
-              ? "bg-yellow-100 text-yellow-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {value || "N/A"}
-        </span>
-      ),
+      key: "discountValue",
+      label: "Discount",
+      minWidth: "110px",
+      render: (value) => (value ? `Rs. ${Number(value).toLocaleString()}` : "Rs. 0"),
     },
-    { key: "createdBy", label: "Created By", minWidth: "120px" },
+    {
+      key: "center",
+      label: "Center",
+      minWidth: "120px",
+      render: (_value, row) => row?.center?.name || "-",
+    },
+    {
+      key: "products",
+      label: "Products",
+      minWidth: "200px",
+      render: (_value, row) => {
+        const parts = (row?.items || []).map((item) => {
+          const name = item?.product?.name || item?.item_name || item?.product_name || "Unnamed";
+          return `${name} `;
+        });
+        return parts.length > 0 ? parts.join(", ") : "-";
+      },
+    },
+    {
+      key: "items",
+      label: "Items",
+      minWidth: "80px",
+      render: (_value, row) => {
+        const totalQty = (row?.items || []).reduce((sum, it) => sum + (it?.quantity ?? 0), 0);
+        return totalQty || 0;
+      }
+    },
+
   ];
 
   const filterOptions = [
@@ -52,7 +77,7 @@ const GrnReport = () => {
       key: "center",
       label: "Center",
       type: "select",
-      options: [], // Populate from API
+      options: [], 
     },
   ];
 

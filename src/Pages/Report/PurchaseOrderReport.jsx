@@ -65,7 +65,10 @@ const PurchaseOrderReport = () => {
       key: "items",
       label: "Items",
       minWidth: "80px",
-      render: (_value, row) => row?.items?.length || 0,
+      render: (_value, row) => {
+        const totalQty = (row?.items || []).reduce((sum, it) => sum + (it?.quantity ?? 0), 0);
+        return totalQty || 0;
+      }
     },
     
    
