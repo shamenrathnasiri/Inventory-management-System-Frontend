@@ -248,12 +248,6 @@ const ProductList = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Compare as strings to avoid type mismatches between numbers and strings
-    const selectedLevel = discountLevels.find(
-      (l) => String(l.id || l.value) === String(formData.discountLevel)
-    );
-    const selectedType = productTypes.find(
-      (t) => String(t.id || t.value) === String(formData.productType)
-    );
 
     try {
       if (currentProduct) {

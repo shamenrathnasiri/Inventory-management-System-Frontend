@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Search, Edit, Trash2, X, Menu, Phone, Mail, MapPin } from 'lucide-react';
 import {
   getCustomers,
-  addCustomerCategory,
   getCustomerTypes,
-  addCustomerType,
   addCustomer,
   updateCustomer,
   deleteCustomer,
@@ -105,7 +103,7 @@ const Customer = () => {
         await loadCustomers();
       } else {
         // Create new customer
-        const newCustomer = await addCustomer(formData);
+        await addCustomer(formData);
         // reload from server so related objects and server-generated fields are present
         await loadCustomers();
         alert('Customer created successfully!');
@@ -169,7 +167,6 @@ const Customer = () => {
           return;
         }
 
-        const newCat = await addCustomerCategory(newCategory.trim());
         // refresh categories from server so ids/shape match backend
         await loadCustomerCategories();
         setNewCategory('');
@@ -195,7 +192,6 @@ const Customer = () => {
           return;
         }
 
-        const newTypeData = await addCustomerType(newType.trim());
         // refresh types from server so ids/shape match backend
         await loadCustomerTypes();
         setNewType('');
